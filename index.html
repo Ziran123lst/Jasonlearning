@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中四數學期中試溫習</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --light-text: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 標題欄 */
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: var(--light-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* 側邊菜單 */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 5rem 1.5rem 2rem;
+            z-index: 999;
+            transition: var(--transition);
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .menu-items {
+            list-style: none;
+        }
+
+        .menu-items li {
+            margin-bottom: 0.8rem;
+        }
+
+        .menu-items a {
+            color: var(--light-text);
+            text-decoration: none;
+            display: block;
+            padding: 0.8rem 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .menu-items a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .menu-items a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .menu-items a.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        /* 主內容區 */
+        .main-content {
+            margin-top: 80px;
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--secondary-color);
+        }
+
+        /* 知識點卡片 */
+        .knowledge-card {
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .knowledge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .knowledge-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .knowledge-card h3 i {
+            color: var(--accent-color);
+        }
+
+        .formula {
+            background-color: #f1f8ff;
+            border: 1px dashed var(--secondary-color);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Cambria Math', serif;
+            font-size: 1.2rem;
+            overflow-x: auto;
+        }
+
+        .formula-center {
+            text-align: center;
+        }
+
+        /* 拋物線圖示例 */
+        .parabola-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+        }
+
+        .parabola-graph {
+            width: 100%;
+            height: 400px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .axis {
+            position: absolute;
+            background-color: #333;
+        }
+
+        .x-axis {
+            width: 100%;
+            height: 2px;
+            bottom: 50%;
+            left: 0;
+        }
+
+        .y-axis {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            top: 0;
+        }
+
+        .parabola-curve {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            stroke: var(--secondary-color);
+            stroke-width: 3;
+            fill: none;
+        }
+
+        .vertex-point {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            transform: translate(-50%, 50%);
+            z-index: 10;
+        }
+
+        .vertex-label {
+            position: absolute;
+            font-weight: bold;
+            color: var(--accent-color);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+
+        .symmetry-line {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background-color: #e74c3c;
+            top: 0;
+            border-left: 1px dashed var(--accent-color);
+        }
+
+        .graph-label {
+            position: absolute;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* 試題解析 */
+        .question-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--secondary-color);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .question-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .question-marks {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .question-content {
+            margin-bottom: 1rem;
+        }
+
+        .answer-container {
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 1.2rem;
+            margin-top: 1rem;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .answer-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 表格樣式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        .data-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        .data-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .data-table tr:hover {
+            background-color: #f1f8ff;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 280px;
+                left: -280px;
+            }
+            
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .parabola-graph {
+                height: 300px;
+            }
+            
+            .formula {
+                font-size: 1rem;
+                padding: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.2rem;
+            }
+            
+            .menu-toggle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .parabola-graph {
+                height: 250px;
+            }
+            
+            .question-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* 頁腳 */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 滾動條樣式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2980b9;
+        }
+
+        /* 高亮樣式 */
+        .highlight {
+            background-color: #fffacd;
+            padding: 0 4px;
+            border-radius: 3px;
+        }
+
+        .important {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* 筆記樣式 */
+        .note-box {
+            background-color: #fff8e1;
+            border-left: 5px solid #ffc107;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .note-title {
+            color: #ff9800;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 關閉按鈕 */
+        .close-menu {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--light-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-menu:hover {
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- 標題欄 -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-calculator"></i>
+            <h1>中四數學期中試溫習</h1>
+        </div>
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- 側邊菜單 -->
+    <aside class="sidebar" id="sidebar">
+        <button class="close-menu" id="closeMenu">
+            <i class="fas fa-times"></i>
+        </button>
+        <h2><i class="fas fa-book"></i> 溫習目錄</h2>
+        <ul class="menu-items">
+            <li><a href="#home" class="active" data-section="home"><i class="fas fa-home"></i> 主頁</a></li>
+            <li><a href="#quadratic-equations" data-section="quadratic-equations"><i class="fas fa-chart-line"></i> 二次方程</a></li>
+            <li><a href="#quadratic-functions" data-section="quadratic-functions"><i class="fas fa-project-diagram"></i> 二次函數圖像</a></li>
+            <li><a href="#linear-equations" data-section="linear-equations"><i class="fas fa-chart-bar"></i> 直線方程</a></li>
+            <li><a href="#graphical-methods" data-section="graphical-methods"><i class="fas fa-draw-polygon"></i> 圖解法</a></li>
+            <li><a href="#discriminant" data-section="discriminant"><i class="fas fa-filter"></i> 判別式與根</a></li>
+            <li><a href="#complex-numbers" data-section="complex-numbers"><i class="fas fa-infinity"></i> 複數</a></li>
+            <li><a href="#profit-loss" data-section="profit-loss"><i class="fas fa-money-bill-wave"></i> 盈利與虧蝕</a></li>
+            <li><a href="#exam-questions" data-section="exam-questions"><i class="fas fa-question-circle"></i> 試題解析</a></li>
+        </ul>
+    </aside>
+
+    <!-- 主內容區 -->
+    <main class="main-content" id="mainContent">
+        <!-- 主頁 -->
+        <section id="home" class="section active">
+            <h2 class="section-title"><i class="fas fa-home"></i> 主頁</h2>
+            <div class="knowledge-card">
+                <h3><i class="fas fa-info-circle"></i> 網站簡介</h3>
+                <p>本網站根據中四數學期中試溫習筆記和工作紙製作，涵蓋所有重要知識點，並提供詳細解釋和試題解析。</p>
+                <p>內容包括：二次方程、二次函數圖像、直線方程、圖解法、判別式、複數、盈利與虧蝕等主題。</p>
+                <p>使用左側菜單可瀏覽不同章節，所有內容已根據香港數學課程和術語編寫。</p>
+            </div>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-lightbulb"></i> 溫習提示</h3>
+                <ul>
+                    <li>二次方程的三種解法：十字相乘法、取平方根法、公式法</li>
+                    <li>二次函數圖像的特徵：開口方向、頂點、對稱軸、截距</li>
+                    <li>直線方程：斜率、截距、平行與垂直的條件</li>
+                    <li>判別式(Δ)的應用：判斷二次方程的根性質</li>
+                    <li>複數運算：以a+bi形式表示結果</li>
+                </ul>
+            </div>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-book-open"></i> 重點公式</h3>
+                <div class="formula formula-center">
+                    二次方程公式：\( x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \)
+                </div>
+                <div class="formula formula-center">
+                    判別式：\( \Delta = b^2 - 4ac \)
+                </div>
+                <div class="formula formula-center">
+                    兩根之和：\( \alpha + \beta = -\frac{b}{a} \)
+                </div>
+                <div class="formula formula-center">
+                    兩根之積：\( \alpha \beta = \frac{c}{a} \)
+                </div>
+            </div>
+        </section>
+
+        <!-- 二次方程 -->
+        <section id="quadratic-equations" class="section">
+            <h2 class="section-title"><i class="fas fa-chart-line"></i> 二次方程</h2>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-calculator"></i> 二次方程定義</h3>
+                <p>二次方程是形如 \( ax^2 + bx + c = 0 \) 的方程，其中 \( a \neq 0 \)。</p>
+                <p>二次方程的解稱為「根」，可能有以下三種情況：</p>
+                <ul>
+                    <li>兩個相異實根</li>
+                    <li>一個二重實根（等根）</li>
+                    <li>沒有實根（有兩個共軛複數根）</li>
+                </ul>
+            </div>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-puzzle-piece"></i> 解二次方程的方法</h3>
+                
+                <h4>1. 十字相乘法</h4>
+                <p>適用於容易分解的二次方程。例如：\( x^2 - 5x + 6 = 0 \) 可分解為 \( (x-2)(x-3) = 0 \)，解得 \( x = 2 \) 或 \( x = 3 \)。</p>
+                
+                <h4>2. 取平方根法</h4>
+                <p>適用於形如 \( (x-h)^2 = k \) 的方程。例如：\( (x-4)^2 = 64 \) 可得 \( x-4 = \pm 8 \)，所以 \( x = 12 \) 或 \( x = -4 \)。</p>
+                
+                <h4>3. 公式法</h4>
+                <p>適用於所有二次方程，使用公式 \( x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \)。</p>
+                <div class="formula formula-center">
+                    \( x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \)
+                </div>
+            </div>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-link"></i> 兩根關係</h3>
+                <p>若二次方程 \( ax^2 + bx + c = 0 \) 的兩根為 \( \alpha \) 和 \( \beta \)，則：</p>
+                <div class="formula formula-center">
+                    兩根之和：\( \alpha + \beta = -\frac{b}{a} \)
+                </div>
+                <div class="formula formula-center">
+                    兩根之積：\( \alpha \beta = \frac{c}{a} \)
+                </div>
+                <p>利用這些關係，可以從已知根建立方程，或從方程推斷根的性質。</p>
+            </div>
+        </section>
+
+        <!-- 二次函數圖像 -->
+        <section id="quadratic-functions" class="section">
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i> 二次函數圖像</h2>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-chart-area"></i> 二次函數圖像特徵</h3>
+                <p>二次函數 \( y = ax^2 + bx + c \) (\( a \neq 0 \)) 的圖像是一條拋物線。</p>
+                
+                <div class="parabola-container">
+                    <h4>拋物線圖示例：\( y = 2x^2 - 7x + 5 \)</h4>
+                    <div class="parabola-graph" id="parabolaGraph1">
+                        <!-- 拋物線將由JavaScript繪製 -->
+                    </div>
+                </div>
+                
+                <p>拋物線的重要特徵：</p>
+                <ul>
+                    <li><span class="highlight">開口方向</span>：由 \( a \) 的正負決定，\( a > 0 \) 開口向上，\( a < 0 \) 開口向下</li>
+                    <li><span class="highlight">頂點</span>：拋物線的最高點或最低點，坐標為 \( \left( -\frac{b}{2a}, f\left(-\frac{b}{2a}\right) \right) \)</li>
+                    <li><span class="highlight">對稱軸</span>：通過頂點的垂直線，方程為 \( x = -\frac{b}{2a} \)</li>
+                    <li><span class="highlight">y截距</span>：當 \( x = 0 \) 時，\( y = c \)</li>
+                    <li><span class="highlight">x截距</span>：方程 \( ax^2 + bx + c = 0 \) 的實根，即圖像與x軸的交點</li>
+                </ul>
+            </div>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-exchange-alt"></i> 一般式與頂點式轉換</h3>
+                <p>二次函數可以從一般式 \( y = ax^2 + bx + c \) 轉換為頂點式 \( y = a(x-h)^2 + k \)，其中 \( (h, k) \) 為頂點坐標。</p>
+                <p>轉換方法：配方法</p>
+                <div class="formula">
+                    例：\( y = 2x^2 - 7x + 5 \)
+                    <br>\( = 2\left(x^2 - \frac{7}{2}x\right) + 5 \)
+                    <br>\( = 2\left[x^2 - \frac{7}{2}x + \left(\frac{7}{4}\right)^2 - \left(\frac{7}{4}\right)^2\right] + 5 \)
+                    <br>\( = 2\left[\left(x - \frac{7}{4}\right)^2 - \frac{49}{16}\right] + 5 \)
+                    <br>\( = 2\left(x - \frac{7}{4}\right)^2 - \frac{49}{8} + 5 \)
+                    <br>\( = 2\left(x - \frac{7}{4}\right)^2 - \frac{9}{8} \)
+                </div>
+                <p>所以頂點為 \( \left( \frac{7}{4}, -\frac{9}{8} \right) \)，對稱軸為 \( x = \frac{7}{4} \)。</p>
+            </div>
+        </section>
+
+        <!-- 直線方程 -->
+        <section id="linear-equations" class="section">
+            <h2 class="section-title"><i class="fas fa-chart-bar"></i> 直線方程</h2>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-sliders-h"></i> 直線方程形式</h3>
+                
+                <h4>1. 一般式</h4>
+                <div class="formula">
+                    \( ax + by + c = 0 \)
+                </div>
+                <p>其中斜率 \( m = -\frac{a}{b} \)，x截距 \( = -\frac{c}{a} \)，y截距 \( = -\frac{c}{b} \)。</p>
+                
+                <h4>2. 斜截式</h4>
+                <div class="formula">
+                    \( y = mx + c \)
+                </div>
+                <p>其中 \( m \) 為斜率，\( c \) 為y截距。</p>
+            </div>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-arrows-alt-h"></i> 直線的平行與垂直</h3>
+                
+                <p>設兩直線斜率分別為 \( m_1 \) 和 \( m_2 \)：</p>
+                <ul>
+                    <li>若兩直線平行，則 \( m_1 = m_2 \)</li>
+                    <li>若兩直線互相垂直，則 \( m_1 \times m_2 = -1 \)</li>
+                </ul>
+                
+                <p>例：直線 \( L_1: 2x - 5y + 26 = 0 \) 與 \( L_2: x + y = 1 \) 的交點坐標：</p>
+                <div class="formula">
+                    解聯立方程：
+                    <br>\( 2x - 5y + 26 = 0 \)
+                    <br>\( x + y = 1 \)
+                    <br>解得交點為 \( (-3, 4) \)
+                </div>
+            </div>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-map-marker-alt"></i> 由點和斜率求直線方程</h3>
+                <p>已知一點 \( (x_1, y_1) \) 和斜率 \( m \)，直線方程為：</p>
+                <div class="formula">
+                    \( y - y_1 = m(x - x_1) \)
+                </div>
+                
+                <p>已知兩點 \( (x_1, y_1) \) 和 \( (x_2, y_2) \)，先求斜率：</p>
+                <div class="formula">
+                    \( m = \frac{y_2 - y_1}{x_2 - x_1} \)
+                </div>
+                <p>然後使用點斜式求方程。</p>
+            </div>
+        </section>
+
+        <!-- 圖解法 -->
+        <section id="graphical-methods" class="section">
+            <h2 class="section-title"><i class="fas fa-draw-polygon"></i> 圖解法解二次方程</h2>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-chart-line"></i> 圖解法原理</h3>
+                <p>二次函數 \( y = ax^2 + bx + c \) 的圖像與x軸的交點（x截距）就是二次方程 \( ax^2 + bx + c = 0 \) 的實根。</p>
+                
+                <p>例：函數 \( y = x^2 + x - 4 \) 的圖像與x軸相交於 -2.6 和 1.6（準確至一位小數），所以方程 \( x^2 + x - 4 = 0 \) 的實根是 -2.6 和 1.6。</p>
+                
+                <div class="parabola-container">
+                    <h4>圖解示例：\( y = x^2 + x - 4 \)</h4>
+                    <div class="parabola-graph" id="parabolaGraph2">
+                        <!-- 拋物線將由JavaScript繪製 -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-ruler-combined"></i> 圖解法步驟</h3>
+                <ol>
+                    <li>繪製二次函數 \( y = ax^2 + bx + c \) 的圖像</li>
+                    <li>找出圖像與x軸的交點</li>
+                    <li>交點的x坐標就是方程 \( ax^2 + bx + c = 0 \) 的解</li>
+                </ol>
+                <p class="note-box">
+                    <span class="note-title"><i class="fas fa-exclamation-circle"></i> 注意：</span>
+                    圖解法得到的解通常是近似值，其精確度取決於作圖的準確度。
+                </p>
+            </div>
+        </section>
+
+        <!-- 判別式與根 -->
+        <section id="discriminant" class="section">
+            <h2 class="section-title"><i class="fas fa-filter"></i> 判別式與根的性質</h2>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-calculator"></i> 判別式定義</h3>
+                <p>對於二次方程 \( ax^2 + bx + c = 0 \)，判別式為：</p>
+                <div class="formula formula-center">
+                    \( \Delta = b^2 - 4ac \)
+                </div>
+                <p>判別式的值決定二次方程的根性質。</p>
+            </div>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-chart-pie"></i> 判別式與根的情況</h3>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>情況</th>
+                            <th>判別式 (Δ)</th>
+                            <th>根的性質</th>
+                            <th>圖像的x截距數目</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>情況一</td>
+                            <td>Δ > 0</td>
+                            <td>兩個不相等實根</td>
+                            <td>2個</td>
+                        </tr>
+                        <tr>
+                            <td>情況二</td>
+                            <td>Δ = 0</td>
+                            <td>一個二重實根（等根）</td>
+                            <td>1個（與x軸相切）</td>
+                        </tr>
+                        <tr>
+                            <td>情況三</td>
+                            <td>Δ < 0</td>
+                            <td>沒有實根（有兩個共軛複數根）</td>
+                            <td>0個</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p>例：方程 \( x^2 - 4x - k = -5 \) 化為 \( x^2 - 4x - k + 5 = 0 \)</p>
+                <p>若方程沒有實根，則 \( \Delta < 0 \)：</p>
+                <div class="formula">
+                    \( (-4)^2 - 4(1)(-k+5) < 0 \)
+                    <br>\( 16 + 4k - 20 < 0 \)
+                    <br>\( 4k - 4 < 0 \)
+                    <br>\( k < 1 \)
+                </div>
+            </div>
+        </section>
+
+        <!-- 複數 -->
+        <section id="complex-numbers" class="section">
+            <h2 class="section-title"><i class="fas fa-infinity"></i> 複數</h2>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-square-root-alt"></i> 複數定義</h3>
+                <p>複數是形如 \( a + bi \) 的數，其中 \( a \) 和 \( b \) 都是實數，\( i \) 是虛數單位，滿足 \( i^2 = -1 \)。</p>
+                <p>\( a \) 稱為實部，\( b \) 稱為虛部。</p>
+            </div>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-plus-circle"></i> 複數運算</h3>
+                
+                <h4>1. 加法</h4>
+                <div class="formula">
+                    \( (a + bi) + (c + di) = (a + c) + (b + d)i \)
+                </div>
+                <p>例：\( (-1 + 4i) + (3 - 9i) = 2 - 5i \)</p>
+                
+                <h4>2. 減法</h4>
+                <div class="formula">
+                    \( (a + bi) - (c + di) = (a - c) + (b - d)i \)
+                </div>
+                
+                <h4>3. 乘法</h4>
+                <div class="formula">
+                    \( (a + bi)(c + di) = (ac - bd) + (ad + bc)i \)
+                </div>
+                <p>例：\( (2 - i)(3 - i) = 6 - 2i - 3i + i^2 = 6 - 5i - 1 = 5 - 5i \)</p>
+                
+                <h4>4. 除法</h4>
+                <p>需要將分母實數化：</p>
+                <div class="formula">
+                    \( \frac{a + bi}{c + di} = \frac{(a + bi)(c - di)}{c^2 + d^2} \)
+                </div>
+            </div>
+        </section>
+
+        <!-- 盈利與虧蝕 -->
+        <section id="profit-loss" class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> 盈利與虧蝕</h2>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-shopping-cart"></i> 基本概念</h3>
+                <ul>
+                    <li><span class="highlight">標價</span>：商品的原定價格</li>
+                    <li><span class="highlight">售價</span>：商品實際出售的價格</li>
+                    <li><span class="highlight">成本</span>：商品的進貨成本</li>
+                    <li><span class="highlight">盈利/虧蝕</span>：售價與成本的差額，售價 > 成本為盈利，售價 < 成本為虧蝕</li>
+                </ul>
+            </div>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-percentage"></i> 重要公式</h3>
+                <div class="formula">
+                    標價 × 打折 = 售價
+                </div>
+                <div class="formula">
+                    售價 - 成本 = 盈利/虧蝕
+                </div>
+                <div class="formula">
+                    盈利百分率 = \( \frac{\text{售價} - \text{成本}}{\text{成本}} \times 100\% \)
+                </div>
+                <div class="formula">
+                    虧蝕百分率 = \( \frac{\text{成本} - \text{售價}}{\text{成本}} \times 100\% \)
+                </div>
+            </div>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-cookie-bite"></i> 應用例子</h3>
+                <p>例：某禮品包內只有牛油曲奇及朱古力曲奇共120塊。該禮品包內有5個盒且每個盒均有相同數目的曲奇。在每個盒內，牛油曲奇均較朱古力曲奇多6塊。該禮品包內有多少塊朱古力曲奇？</p>
+                
+                <div class="formula">
+                    每盒曲奇數目：\( 120 \div 5 = 24 \) 塊
+                    <br>設每盒朱古力曲奇有 \( y \) 塊，則牛油曲奇有 \( y + 6 \) 塊
+                    <br>\( y + (y + 6) = 24 \)
+                    <br>\( 2y + 6 = 24 \)
+                    <br>\( 2y = 18 \)
+                    <br>\( y = 9 \)
+                    <br>全禮品包朱古力曲奇：\( 9 \times 5 = 45 \) 塊
+                </div>
+            </div>
+        </section>
+
+        <!-- 試題解析 -->
+        <section id="exam-questions" class="section">
+            <h2 class="section-title"><i class="fas fa-question-circle"></i> 試題解析</h2>
+            
+            <div class="knowledge-card">
+                <h3><i class="fas fa-clipboard-list"></i> 試題來源</h3>
+                <p>以下試題解析來自「樂善堂梁銶琚書院 2025-2026 中四數學 – 期中試溫習工作紙」。</p>
+                <p>試題分為甲部（長題目）和乙部（選擇題），以下挑選部分重要題目進行解析。</p>
+            </div>
+            
+            <!-- 試題1 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">1</div>
+                    <div class="question-marks">3分</div>
+                </div>
+                <div class="question-content">
+                    <p>化簡 \( \frac{4m^7n^{-5}}{8m^{-2}n^7} \)，並以正指數表示答案。</p>
+                </div>
+                <div class="answer-container">
+                    <div class="answer-title"><i class="fas fa-lightbulb"></i> 解析：</div>
+                    <div class="formula">
+                        \( \frac{4m^7n^{-5}}{8m^{-2}n^7} = \frac{4}{8} \times \frac{m^7}{m^{-2}} \times \frac{n^{-5}}{n^7} \)
+                        <br>\( = \frac{1}{2} \times m^{7-(-2)} \times n^{-5-7} \)
+                        <br>\( = \frac{1}{2} m^9 n^{-12} \)
+                        <br>\( = \frac{m^9}{2n^{12}} \)
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 試題4 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">4</div>
+                    <div class="question-marks">4分</div>
+                </div>
+                <div class="question-content">
+                    <p>某手袋的標價為 $500。現該手袋以其標價九折售出。</p>
+                    <p>(a) 求該手袋的售價。</p>
+                    <p>(b) 若該手袋獲利 $90，求該手袋的盈利百分率。</p>
+                </div>
+                <div class="answer-container">
+                    <div class="answer-title"><i class="fas fa-lightbulb"></i> 解析：</div>
+                    <p>(a) 售價 = 標價 × 折扣 = $500 × 90% = $450</p>
+                    <div class="formula">
+                        (b) 成本 = 售價 - 盈利 = $450 - $90 = $360
+                        <br>盈利百分率 = \( \frac{\text{盈利}}{\text{成本}} \times 100\% = \frac{90}{360} \times 100\% = 25\% \)
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 試題6 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">6</div>
+                    <div class="question-marks">4分</div>
+                </div>
+                <div class="question-content">
+                    <p>解以下方程：</p>
+                    <p>(a) \( (x-4)^2 = 64 \)</p>
+                    <p>(b) \( \frac{1}{2}x^2 - 11x + 9 = 0 \)</p>
+                </div>
+                <div class="answer-container">
+                    <div class="answer-title"><i class="fas fa-lightbulb"></i> 解析：</div>
+                    <p>(a) 使用取平方根法：</p>
+                    <div class="formula">
+                        \( (x-4)^2 = 64 \)
+                        <br>\( x-4 = \pm 8 \)
+                        <br>\( x = 4 + 8 \) 或 \( x = 4 - 8 \)
+                        <br>\( x = 12 \) 或 \( x = -4 \)
+                    </div>
+                    <p>(b) 使用公式法，先將方程乘以2：</p>
+                    <div class="formula">
+                        \( x^2 - 22x + 18 = 0 \)
+                        <br>\( x = \frac{22 \pm \sqrt{(-22)^2 - 4(1)(18)}}{2(1)} \)
+                        <br>\( = \frac{22 \pm \sqrt{484 - 72}}{2} \)
+                        <br>\( = \frac{22 \pm \sqrt{412}}{2} \)
+                        <br>\( = \frac{22 \pm 2\sqrt{103}}{2} \)
+                        <br>\( = 11 \pm \sqrt{103} \)
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 試題7 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">7</div>
+                    <div class="question-marks">4分</div>
+                </div>
+                <div class="question-content">
+                    <p>若二次方程 \( x^2 - 4x - k = -5 \) 沒有實根，求 \( k \) 值的範圍。</p>
+                </div>
+                <div class="answer-container">
+                    <div class="answer-title"><i class="fas fa-lightbulb"></i> 解析：</div>
+                    <p>先將方程化為一般式：</p>
+                    <div class="formula">
+                        \( x^2 - 4x - k + 5 = 0 \)
+                        <br>沒有實根 ⇒ Δ < 0
+                        <br>\( (-4)^2 - 4(1)(-k+5) < 0 \)
+                        <br>\( 16 + 4k - 20 < 0 \)
+                        <br>\( 4k - 4 < 0 \)
+                        <br>\( 4k < 4 \)
+                        <br>\( k < 1 \)
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 試題11 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">11</div>
+                    <div class="question-marks">6分</div>
+                </div>
+                <div class="question-content">
+                    <p>設 \( k \) 是非零常數，\( y = kx^2 - 6x + k \) 的圖像與 \( x \) 軸只接觸於一點。\( k \) 是否有兩個可能值？試解釋你的答案。</p>
+                </div>
+                <div class="answer-container">
+                    <div class="answer-title"><i class="fas fa-lightbulb"></i> 解析：</div>
+                    <p>圖像與x軸只接觸於一點 ⇒ 方程 \( kx^2 - 6x + k = 0 \) 有等根（二重實根）⇒ Δ = 0</p>
+                    <div class="formula">
+                        \( (-6)^2 - 4(k)(k) = 0 \)
+                        <br>\( 36 - 4k^2 = 0 \)
+                        <br>\( 4k^2 = 36 \)
+                        <br>\( k^2 = 9 \)
+                        <br>\( k = \pm 3 \)
+                    </div>
+                    <p>因此，\( k \) 有兩個可能值：3 和 -3。</p>
+                </div>
+            </div>
+            
+            <!-- 試題17 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">17</div>
+                    <div class="question-marks">4分</div>
+                </div>
+                <div class="question-content">
+                    <p>點 \( A \) 及點 \( B \) 的坐標分別為 (-4, 1) 及 (8, -3)。</p>
+                    <p>(a) 求 \( AB \) 的斜率。</p>
+                    <p>(b) 求通過 \( A \) 且垂直於 \( AB \) 的直線的方程。</p>
+                </div>
+                <div class="answer-container">
+                    <div class="answer-title"><i class="fas fa-lightbulb"></i> 解析：</div>
+                    <p>(a) 斜率公式：</p>
+                    <div class="formula">
+                        \( m_{AB} = \frac{y_2 - y_1}{x_2 - x_1} = \frac{-3 - 1}{8 - (-4)} = \frac{-4}{12} = -\frac{1}{3} \)
+                    </div>
+                    <p>(b) 垂直直線的斜率：</p>
+                    <div class="formula">
+                        設所求直線斜率為 \( m \)，則 \( m \times \left(-\frac{1}{3}\right) = -1 \)
+                        <br>\( m = 3 \)
+                        <br>使用點斜式：\( y - 1 = 3[x - (-4)] \)
+                        <br>\( y - 1 = 3(x + 4) \)
+                        <br>\( y = 3x + 12 + 1 \)
+                        <br>\( y = 3x + 13 \)
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 試題20 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">20</div>
+                    <div class="question-marks">10分</div>
+                </div>
+                <div class="question-content">
+                    <p>設 \( f(x) \) 為二次函數。已知 \( y = f(x) \) 的圖像的 \( x \) 截距為 -3 及 4，而圖像的 \( y \) 截距為 24。</p>
+                    <p>(a) 求 \( f(x) \)。</p>
+                    <p>(b) 寫出 \( y = f(x) \) 的圖像的對稱軸的方程。</p>
+                    <p>(c) 由此，或利用其他方法，求 \( y = f(x) \) 的圖像的頂點的坐標。</p>
+                </div>
+                <div class="answer-container">
+                    <div class="answer-title"><i class="fas fa-lightbulb"></i> 解析：</div>
+                    <p>(a) 已知x截距為 -3 和 4，可設：</p>
+                    <div class="formula">
+                        \( f(x) = a(x + 3)(x - 4) \)
+                        <br>代入y截距 (0, 24)：\( f(0) = a(3)(-4) = 24 \)
+                        <br>\( -12a = 24 \)
+                        <br>\( a = -2 \)
+                        <br>∴ \( f(x) = -2(x + 3)(x - 4) \)
+                    </div>
+                    <p>(b) 對稱軸通過兩個x截距的中點：</p>
+                    <div class="formula">
+                        \( x = \frac{-3 + 4}{2} = \frac{1}{2} \)
+                    </div>
+                    <p>(c) 頂點在對稱軸上，代入 \( x = \frac{1}{2} \)：</p>
+                    <div class="formula">
+                        \( f\left(\frac{1}{2}\right) = -2\left(\frac{1}{2} + 3\right)\left(\frac{1}{2} - 4\right) \)
+                        <br>\( = -2 \times \frac{7}{2} \times \left(-\frac{7}{2}\right) \)
+                        <br>\( = -2 \times \left(-\frac{49}{4}\right) \)
+                        <br>\( = \frac{49}{2} \)
+                        <br>∴ 頂點坐標為 \( \left( \frac{1}{2}, \frac{49}{2} \right) \)
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 頁腳 -->
+    <footer>
+        <div class="footer-content">
+            <p>中四數學期中試溫習網站 &copy; 2025</p>
+            <p>涵蓋二次方程、二次函數圖像、直線方程、複數等重點知識</p>
+            <p>本網站內容根據香港數學課程編寫，使用繁體中文和香港教科書用語</p>
+        </div>
+    </footer>
+
+    <script>
+        // 菜單控制
+        const menuToggle = document.getElementById('menuToggle');
+        const closeMenu = document.getElementById('closeMenu');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+        const menuItems = document.querySelectorAll('.menu-items a');
+        const sections = document.querySelectorAll('.section');
+        
+        // 切換菜單顯示/隱藏
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.add('active');
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+        });
+        
+        // 點擊菜單項目切換章節
+        menuItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // 移除所有active類
+                menuItems.forEach(i => i.classList.remove('active'));
+                sections.forEach(s => s.classList.remove('active'));
+                
+                // 添加active類到當前項目
+                item.classList.add('active');
+                
+                // 顯示對應章節
+                const sectionId = item.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+                
+                // 在移動設備上關閉菜單
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('active');
+                }
+                
+                // 滾動到頂部
+                window.scrollTo(0, 0);
+            });
+        });
+        
+        // 繪製拋物線圖1: y = 2x^2 - 7x + 5
+        function drawParabola1() {
+            const graph = document.getElementById('parabolaGraph1');
+            if (!graph) return;
+            
+            const width = graph.offsetWidth;
+            const height = graph.offsetHeight;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const scale = 25; // 像素與單位值的比例
+            
+            // 清空圖形
+            graph.innerHTML = '';
+            
+            // 繪製坐標軸
+            const xAxis = document.createElement('div');
+            xAxis.className = 'axis x-axis';
+            xAxis.style.bottom = `${centerY}px`;
+            graph.appendChild(xAxis);
+            
+            const yAxis = document.createElement('div');
+            yAxis.className = 'axis y-axis';
+            yAxis.style.left = `${centerX}px`;
+            graph.appendChild(yAxis);
+            
+            // 坐標軸標籤
+            const xLabel = document.createElement('div');
+            xLabel.className = 'graph-label';
+            xLabel.textContent = 'x';
+            xLabel.style.right = '10px';
+            xLabel.style.bottom = `${centerY - 20}px`;
+            graph.appendChild(xLabel);
+            
+            const yLabel = document.createElement('div');
+            yLabel.className = 'graph-label';
+            yLabel.textContent = 'y';
+            yLabel.style.left = `${centerX + 10}px`;
+            yLabel.style.top = '10px';
+            graph.appendChild(yLabel);
+            
+            // 原點標記
+            const origin = document.createElement('div');
+            origin.className = 'graph-label';
+            origin.textContent = 'O';
+            origin.style.left = `${centerX + 5}px`;
+            origin.style.bottom = `${centerY - 20}px`;
+            graph.appendChild(origin);
+            
+            // 計算頂點 (7/4, -9/8) ≈ (1.75, -1.125)
+            const vertexX = 1.75;
+            const vertexY = -1.125;
+            
+            // 繪製對稱軸 x = 7/4
+            const symmetryLine = document.createElement('div');
+            symmetryLine.className = 'symmetry-line';
+            symmetryLine.style.left = `${centerX + vertexX * scale}px`;
+            graph.appendChild(symmetryLine);
+            
+            // 對稱軸標籤
+            const symmetryLabel = document.createElement('div');
+            symmetryLabel.className = 'graph-label';
+            symmetryLabel.textContent = 'x = 7/4';
+            symmetryLabel.style.left = `${centerX + vertexX * scale + 5}px`;
+            symmetryLabel.style.top = '10px';
+            symmetryLabel.style.color = '#e74c3c';
+            graph.appendChild(symmetryLabel);
+            
+            // 繪製拋物線點
+            const points = [];
+            for (let x = -4; x <= 6; x += 0.1) {
+                const y = 2*x*x - 7*x + 5;
+                points.push({x, y});
+            }
+            
+            // 創建SVG繪製拋物線
+            const svgNS = "http://www.w3.org/2000/svg";
+            const svg = document.createElementNS(svgNS, "svg");
+            svg.setAttribute("width", "100%");
+            svg.setAttribute("height", "100%");
+            svg.setAttribute("class", "parabola-curve");
+            
+            const path = document.createElementNS(svgNS, "path");
+            let d = "";
+            
+            for (let i = 0; i < points.length; i++) {
+                const x = centerX + points[i].x * scale;
+                const y = centerY - points[i].y * scale;
+                
+                if (i === 0) {
+                    d += `M ${x} ${y} `;
+                } else {
+                    d += `L ${x} ${y} `;
+                }
+            }
+            
+            path.setAttribute("d", d);
+            svg.appendChild(path);
+            graph.appendChild(svg);
+            
+            // 繪製頂點
+            const vertexPoint = document.createElement('div');
+            vertexPoint.className = 'vertex-point';
+            vertexPoint.style.left = `${centerX + vertexX * scale}px`;
+            vertexPoint.style.bottom = `${centerY - vertexY * scale}px`;
+            graph.appendChild(vertexPoint);
+            
+            const vertexLabel = document.createElement('div');
+            vertexLabel.className = 'vertex-label';
+            vertexLabel.textContent = `頂點 (${vertexX}, ${vertexY})`;
+            vertexLabel.style.left = `${centerX + vertexX * scale + 10}px`;
+            vertexLabel.style.bottom = `${centerY - vertexY * scale + 10}px`;
+            graph.appendChild(vertexLabel);
+            
+            // 繪製x截距 (2.5, 0) 和 (1, 0)
+            const xIntercept1 = document.createElement('div');
+            xIntercept1.className = 'vertex-point';
+            xIntercept1.style.backgroundColor = '#2ecc71';
+            xIntercept1.style.left = `${centerX + 2.5 * scale}px`;
+            xIntercept1.style.bottom = `${centerY}px`;
+            graph.appendChild(xIntercept1);
+            
+            const xIntercept2 = document.createElement('div');
+            xIntercept2.className = 'vertex-point';
+            xIntercept2.style.backgroundColor = '#2ecc71';
+            xIntercept2.style.left = `${centerX + 1 * scale}px`;
+            xIntercept2.style.bottom = `${centerY}px`;
+            graph.appendChild(xIntercept2);
+            
+            // y截距 (0, 5)
+            const yIntercept = document.createElement('div');
+            yIntercept.className = 'vertex-point';
+            yIntercept.style.backgroundColor = '#f39c12';
+            yIntercept.style.left = `${centerX}px`;
+            yIntercept.style.bottom = `${centerY - 5 * scale}px`;
+            graph.appendChild(yIntercept);
+        }
+        
+        // 繪製拋物線圖2: y = x^2 + x - 4
+        function drawParabola2() {
+            const graph = document.getElementById('parabolaGraph2');
+            if (!graph) return;
+            
+            const width = graph.offsetWidth;
+            const height = graph.offsetHeight;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const scale = 30;
+            
+            // 清空圖形
+            graph.innerHTML = '';
+            
+            // 繪製坐標軸
+            const xAxis = document.createElement('div');
+            xAxis.className = 'axis x-axis';
+            xAxis.style.bottom = `${centerY}px`;
+            graph.appendChild(xAxis);
+            
+            const yAxis = document.createElement('div');
+            yAxis.className = 'axis y-axis';
+            yAxis.style.left = `${centerX}px`;
+            graph.appendChild(yAxis);
+            
+            // 繪製拋物線點
+            const points = [];
+            for (let x = -5; x <= 4; x += 0.1) {
+                const y = x*x + x - 4;
+                points.push({x, y});
+            }
+            
+            // 創建SVG繪製拋物線
+            const svgNS = "http://www.w3.org/2000/svg";
+            const svg = document.createElementNS(svgNS, "svg");
+            svg.setAttribute("width", "100%");
+            svg.setAttribute("height", "100%");
+            svg.setAttribute("class", "parabola-curve");
+            
+            const path = document.createElementNS(svgNS, "path");
+            let d = "";
+            
+            for (let i = 0; i < points.length; i++) {
+                const x = centerX + points[i].x * scale;
+                const y = centerY - points[i].y * scale;
+                
+                if (i === 0) {
+                    d += `M ${x} ${y} `;
+                } else {
+                    d += `L ${x} ${y} `;
+                }
+            }
+            
+            path.setAttribute("d", d);
+            svg.appendChild(path);
+            graph.appendChild(svg);
+            
+            // x截距 (-2.6, 0) 和 (1.6, 0)
+            const xIntercept1 = document.createElement('div');
+            xIntercept1.className = 'vertex-point';
+            xIntercept1.style.backgroundColor = '#2ecc71';
+            xIntercept1.style.left = `${centerX - 2.6 * scale}px`;
+            xIntercept1.style.bottom = `${centerY}px`;
+            graph.appendChild(xIntercept1);
+            
+            const xLabel1 = document.createElement('div');
+            xLabel1.className = 'vertex-label';
+            xLabel1.textContent = '(-2.6, 0)';
+            xLabel1.style.left = `${centerX - 2.6 * scale - 60}px`;
+            xLabel1.style.bottom = `${centerY + 15}px`;
+            graph.appendChild(xLabel1);
+            
+            const xIntercept2 = document.createElement('div');
+            xIntercept2.className = 'vertex-point';
+            xIntercept2.style.backgroundColor = '#2ecc71';
+            xIntercept2.style.left = `${centerX + 1.6 * scale}px`;
+            xIntercept2.style.bottom = `${centerY}px`;
+            graph.appendChild(xIntercept2);
+            
+            const xLabel2 = document.createElement('div');
+            xLabel2.className = 'vertex-label';
+            xLabel2.textContent = '(1.6, 0)';
+            xLabel2.style.left = `${centerX + 1.6 * scale + 10}px`;
+            xLabel2.style.bottom = `${centerY + 15}px`;
+            graph.appendChild(xLabel2);
+            
+            // 頂點 (-0.5, -4.25)
+            const vertexPoint = document.createElement('div');
+            vertexPoint.className = 'vertex-point';
+            vertexPoint.style.left = `${centerX - 0.5 * scale}px`;
+            vertexPoint.style.bottom = `${centerY + 4.25 * scale}px`;
+            graph.appendChild(vertexPoint);
+            
+            const vertexLabel = document.createElement('div');
+            vertexLabel.className = 'vertex-label';
+            vertexLabel.textContent = '頂點 (-0.5, -4.25)';
+            vertexLabel.style.left = `${centerX - 0.5 * scale - 80}px`;
+            vertexLabel.style.bottom = `${centerY + 4.25 * scale - 20}px`;
+            graph.appendChild(vertexLabel);
+            
+            // y截距 (0, -4)
+            const yIntercept = document.createElement('div');
+            yIntercept.className = 'vertex-point';
+            yIntercept.style.backgroundColor = '#f39c12';
+            yIntercept.style.left = `${centerX}px`;
+            yIntercept.style.bottom = `${centerY + 4 * scale}px`;
+            graph.appendChild(yIntercept);
+        }
+        
+        // 當窗口大小改變時重新繪製圖形
+        window.addEventListener('resize', () => {
+            drawParabola1();
+            drawParabola2();
+        });
+        
+        // 頁面加載完成後初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初始化菜單
+            menuItems[0].classList.add('active');
+            
+            // 繪製拋物線圖
+            setTimeout(() => {
+                drawParabola1();
+                drawParabola2();
+            }, 100);
+            
+            // 點擊主內容區關閉菜單（移動設備）
+            mainContent.addEventListener('click', () => {
+                if (window.innerWidth <= 768 && sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                }
+            });
+            
+            // 渲染數學公式（如果頁面中有MathJax）
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typeset();
+            }
+        });
+        
+        // 簡單的數學公式渲染函數（如果沒有MathJax）
+        function renderFormulas() {
+            const formulas = document.querySelectorAll('.formula');
+            formulas.forEach(formula => {
+                const html = formula.innerHTML;
+                // 這是一個簡單的示例，實際中應該使用MathJax或KaTeX
+                formula.innerHTML = html
+                    .replace(/\(/g, '<span class="math-bracket">(</span>')
+                    .replace(/\)/g, '<span class="math-bracket">)</span>')
+                    .replace(/\^2/g, '<sup>2</sup>')
+                    .replace(/\^3/g, '<sup>3</sup>');
+            });
+        }
+        
+        // 初始化公式渲染
+        renderFormulas();
+    </script>
+    
+    <!-- 簡單的MathJax配置用於渲染數學公式 -->
+    <script>
+        // 檢測是否支持MathJax，如果不支持則使用簡單的渲染
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</body>
+</html>
