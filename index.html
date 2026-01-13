@@ -1,0 +1,2525 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中四數學全面溫習指南</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-darker: #050505;
+            --bg-card: #1a1a1a;
+            --bg-card-light: #222222;
+            --bg-card-lighter: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #bbbbbb;
+            --text-tertiary: #888888;
+            --accent-blue: #3498db;
+            --accent-blue-light: #5dade2;
+            --accent-green: #27ae60;
+            --accent-green-light: #2ecc71;
+            --accent-orange: #f39c12;
+            --accent-orange-light: #f1c40f;
+            --accent-red: #e74c3c;
+            --accent-purple: #9b59b6;
+            --border-color: #333333;
+            --border-light: #444444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft JhengHei', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            padding-bottom: 60px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(39, 174, 96, 0.05) 0%, transparent 20%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 25px;
+        }
+        
+        /* 標題與導航 */
+        header {
+            background-color: rgba(10, 10, 10, 0.95);
+            color: var(--text-primary);
+            padding: 30px 0;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--accent-blue);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: var(--accent-blue);
+            text-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+        }
+        
+        .chapter-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        
+        .nav-item {
+            background-color: var(--bg-card);
+            color: var(--text-secondary);
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+        }
+        
+        .nav-item:hover {
+            background-color: var(--accent-blue);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        /* 章節樣式 */
+        .chapter {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chapter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-blue), var(--accent-green));
+        }
+        
+        h2 {
+            color: var(--accent-blue-light);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            font-size: 2.2rem;
+        }
+        
+        h3 {
+            color: var(--accent-green);
+            margin: 30px 0 20px 0;
+            font-size: 1.8rem;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 24px;
+            background-color: var(--accent-green);
+            border-radius: 3px;
+        }
+        
+        h4 {
+            color: var(--accent-orange);
+            margin: 25px 0 15px 0;
+            font-size: 1.5rem;
+        }
+        
+        h5 {
+            color: var(--text-secondary);
+            margin: 20px 0 12px 0;
+            font-size: 1.3rem;
+        }
+        
+        /* 內容框樣式 */
+        .formula-box {
+            background-color: var(--bg-card-light);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 5px solid var(--accent-blue);
+            border-right: 1px solid var(--border-color);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .formula-box h4 {
+            color: var(--accent-blue-light);
+            margin-top: 0;
+        }
+        
+        .tip-box {
+            background-color: rgba(243, 156, 18, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 5px solid var(--accent-orange);
+            border: 1px solid rgba(243, 156, 18, 0.3);
+        }
+        
+        .tip-box h4 {
+            color: var(--accent-orange-light);
+        }
+        
+        .warning-box {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 5px solid var(--accent-red);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+        
+        .warning-box h4 {
+            color: var(--accent-red);
+        }
+        
+        .explanation-box {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 5px solid var(--accent-blue);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+        
+        .question-box {
+            background-color: var(--bg-card-lighter);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+        
+        .question-box::before {
+            content: '📚';
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background-color: var(--bg-card);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            border: 1px solid var(--accent-blue);
+        }
+        
+        .step-by-step {
+            margin: 20px 0;
+            padding-left: 20px;
+            border-left: 3px solid var(--accent-purple);
+        }
+        
+        .step {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: rgba(155, 89, 182, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-purple);
+        }
+        
+        .step-title {
+            font-weight: bold;
+            color: var(--accent-purple);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .step-title::before {
+            content: '➤';
+            margin-right: 10px;
+        }
+        
+        .answer-box {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 25px;
+            border-left: 5px solid var(--accent-green);
+        }
+        
+        .answer-title {
+            color: var(--accent-green);
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        /* 網格佈局 */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .grid-item {
+            background-color: var(--bg-card-light);
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent-blue);
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .comparison-table th {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .comparison-table td {
+            padding: 18px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-card-light);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:hover td {
+            background-color: var(--bg-card-lighter);
+        }
+        
+        /* 列表樣式 */
+        ul, ol {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+        
+        li {
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+        
+        .math-list {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+        
+        .math-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .math-list li::before {
+            content: '•';
+            color: var(--accent-blue);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+        
+        /* 公式樣式 */
+        .math-formula {
+            font-size: 1.3rem;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            border: 1px solid var(--border-light);
+        }
+        
+        .inline-formula {
+            background-color: rgba(52, 152, 219, 0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 1.1rem;
+        }
+        
+        /* 互動元素 */
+        .interactive-section {
+            background-color: var(--bg-card-light);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        .input-group {
+            margin: 20px 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--bg-darker);
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-blue), #2980b9);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 15px 10px 15px 0;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(135deg, #2980b9, var(--accent-blue));
+        }
+        
+        .btn-calc {
+            background: linear-gradient(135deg, var(--accent-green), #219653);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+        
+        .btn-calc:hover {
+            background: linear-gradient(135deg, #219653, var(--accent-green));
+            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.4);
+        }
+        
+        .btn-reset {
+            background: linear-gradient(135deg, #7f8c8d, #95a5a6);
+            box-shadow: 0 5px 15px rgba(127, 140, 141, 0.3);
+        }
+        
+        .btn-reset:hover {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            box-shadow: 0 8px 20px rgba(127, 140, 141, 0.4);
+        }
+        
+        .result {
+            margin-top: 25px;
+            padding: 25px;
+            background-color: var(--bg-card-lighter);
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-blue);
+            border: 1px solid var(--border-light);
+        }
+        
+        .result-title {
+            color: var(--accent-blue);
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        /* 頁腳 */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-tertiary);
+            font-size: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: var(--accent-blue);
+        }
+        
+        /* 響應式設計 */
+        @media (max-width: 992px) {
+            .grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .chapter {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 2.3rem;
+            }
+            
+            h2 {
+                font-size: 1.9rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .chapter-nav {
+                justify-content: center;
+            }
+            
+            .nav-item {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+            }
+            
+            .chapter {
+                padding: 20px;
+            }
+        }
+        
+        /* 特殊元素 */
+        .definition {
+            padding: 20px;
+            margin: 20px 0;
+            background-color: rgba(155, 89, 182, 0.05);
+            border-radius: 8px;
+            border-left: 5px solid var(--accent-purple);
+        }
+        
+        .definition-title {
+            color: var(--accent-purple);
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .example {
+            padding: 20px;
+            margin: 20px 0;
+            background-color: rgba(52, 152, 219, 0.05);
+            border-radius: 8px;
+            border-left: 5px solid var(--accent-blue);
+        }
+        
+        .example-title {
+            color: var(--accent-blue);
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .note {
+            padding: 15px;
+            margin: 15px 0;
+            background-color: rgba(243, 156, 18, 0.05);
+            border-radius: 6px;
+            border-left: 4px solid var(--accent-orange);
+            font-style: italic;
+        }
+        
+        .highlight {
+            background-color: rgba(243, 156, 18, 0.2);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        /* 滾動條樣式 */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darker);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 6px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-blue-light);
+        }
+        
+        /* 打印樣式 */
+        @media print {
+            body {
+                background-color: white;
+                color: black;
+            }
+            
+            .chapter {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            
+            .btn, .nav-item, .interactive-section {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1>中四數學全面溫習指南</h1>
+                    <p class="subtitle">二次方程、函數圖像、判別式、直線方程、複數運算與應用題 | 基於王劍鋒老師筆記與工作紙整理</p>
+                </div>
+            </div>
+            
+            <div class="chapter-nav">
+                <a href="#chapter1" class="nav-item">第1章：二次方程基礎</a>
+                <a href="#chapter2" class="nav-item">第2章：判別式深入理解</a>
+                <a href="#chapter3" class="nav-item">第3章：二次函數圖像</a>
+                <a href="#chapter4" class="nav-item">第4章：直線方程與關係</a>
+                <a href="#chapter5" class="nav-item">第5章：複數運算</a>
+                <a href="#chapter6" class="nav-item">第6章：應用題解析</a>
+                <a href="#chapter7" class="nav-item">第7章：公式變換與因式分解</a>
+                <a href="#chapter8" class="nav-item">第8章：考試技巧與常見錯誤</a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 第1章：二次方程基礎 -->
+        <section id="chapter1" class="chapter">
+            <h2>第1章：二次方程基礎</h2>
+            
+            <div class="definition">
+                <div class="definition-title">二次方程定義</div>
+                <p>二次方程是形如 \( ax^2 + bx + c = 0 \) 的方程，其中 \( a \neq 0 \)，且 \( a, b, c \) 為實數。</p>
+            </div>
+            
+            <h3>1.1 二次方程的三種解法</h3>
+            
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h4>十字相乘法</h4>
+                    <p>將二次方程分解為兩個一次因式相乘。適用於係數較小且容易分解的方程。</p>
+                    <div class="math-formula">
+                        <p>例：\( x^2 + 5x + 6 = 0 \)</p>
+                        <p>分解為 \( (x+2)(x+3) = 0 \)</p>
+                        <p>∴ \( x = -2 \) 或 \( x = -3 \)</p>
+                    </div>
+                    <div class="note">
+                        <p>技巧：尋找兩個數，其和為 \( b \)，其積為 \( ac \)。</p>
+                    </div>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>配方法</h4>
+                    <p>將方程化為完全平方形式，然後開平方求解。</p>
+                    <div class="math-formula">
+                        <p>例：\( x^2 + 6x + 5 = 0 \)</p>
+                        <p>配方：\( x^2 + 6x + 9 - 4 = 0 \)</p>
+                        <p>得 \( (x+3)^2 - 4 = 0 \)</p>
+                        <p>∴ \( (x+3)^2 = 4 \)</p>
+                        <p>\( x = -3 \pm 2 \)</p>
+                    </div>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>公式法</h4>
+                    <p>使用二次公式直接求解，適用於所有二次方程。</p>
+                    <div class="math-formula">
+                        <p>\[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]</p>
+                    </div>
+                    <p>其中 \( \Delta = b^2 - 4ac \) 稱為判別式。</p>
+                </div>
+            </div>
+            
+            <h3>1.2 二次方程根的特性</h3>
+            
+            <div class="formula-box">
+                <h4>兩根之和與兩根之積</h4>
+                <p>對於二次方程 \( ax^2 + bx + c = 0 \)，設其兩根為 \( \alpha \) 和 \( \beta \)，則：</p>
+                <div class="math-formula">
+                    <p>\[ \alpha + \beta = -\frac{b}{a} \]</p>
+                    <p>\[ \alpha \beta = \frac{c}{a} \]</p>
+                </div>
+                <p>這兩個公式在不解方程的情況下，可以快速得到兩根的關係。</p>
+            </div>
+            
+            <div class="example">
+                <div class="example-title">例題：工作紙題目15</div>
+                <p>若二次方程 \( 5x^2 + (k-7)x + 2k = 0 \) 的兩根之積是4，求兩根之和。</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">步驟1：應用兩根之積公式</div>
+                        <p>已知兩根之積 = 4，根據公式 \( \alpha\beta = \frac{c}{a} \)：</p>
+                        <p>\[ \frac{2k}{5} = 4 \]</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟2：解出 k</div>
+                        <p>\[ 2k = 20 \]</p>
+                        <p>\[ k = 10 \]</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟3：應用兩根之和公式</div>
+                        <p>兩根之和 \( \alpha + \beta = -\frac{b}{a} = -\frac{k-7}{5} \)</p>
+                        <p>代入 \( k = 10 \)：</p>
+                        <p>\[ \alpha + \beta = -\frac{10-7}{5} = -\frac{3}{5} \]</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>兩根之和為 \( -\frac{3}{5} \)。</p>
+                </div>
+            </div>
+            
+            <h3>1.3 建立二次方程</h3>
+            
+            <div class="explanation-box">
+                <h4>已知兩根建立方程</h4>
+                <p>若已知二次方程的兩根為 \( \alpha \) 和 \( \beta \)，則該方程可寫為：</p>
+                <div class="math-formula">
+                    <p>\[ x^2 - (\alpha + \beta)x + \alpha\beta = 0 \]</p>
+                </div>
+                <p>或更一般地：</p>
+                <div class="math-formula">
+                    <p>\[ a[x^2 - (\alpha + \beta)x + \alpha\beta] = 0 \]，其中 \( a \neq 0 \)。</p>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4>📝 實用技巧</h4>
+                <ul class="math-list">
+                    <li>解二次方程時，先檢查是否能用十字相乘法（係數較小時）</li>
+                    <li>使用公式法時，先計算判別式，可預知根的情況</li>
+                    <li>兩根之和與積的公式可幫助驗算答案</li>
+                    <li>建立方程時，注意兩根之和與積的正負號</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- 第2章：判別式深入理解 -->
+        <section id="chapter2" class="chapter">
+            <h2>第2章：判別式深入理解</h2>
+            
+            <div class="definition">
+                <div class="definition-title">判別式定義</div>
+                <p>對於二次方程 \( ax^2 + bx + c = 0 \)，判別式 \( \Delta = b^2 - 4ac \)。</p>
+                <p>判別式決定了二次方程根的性質，也反映了二次函數圖像與x軸的交點情況。</p>
+            </div>
+            
+            <h3>2.1 判別式與根的關係</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>判別式 Δ</th>
+                        <th>根的性質</th>
+                        <th>二次函數圖像與x軸交點</th>
+                        <th>例子</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>\( \Delta > 0 \)</td>
+                        <td>兩個相異實根</td>
+                        <td>與x軸有兩個交點</td>
+                        <td>\( x^2 - 5x + 6 = 0 \)<br>\( \Delta = 1 > 0 \)</td>
+                    </tr>
+                    <tr>
+                        <td>\( \Delta = 0 \)</td>
+                        <td>一個二重實根（等根）</td>
+                        <td>與x軸有一個交點（相切）</td>
+                        <td>\( x^2 - 4x + 4 = 0 \)<br>\( \Delta = 0 \)</td>
+                    </tr>
+                    <tr>
+                        <td>\( \Delta < 0 \)</td>
+                        <td>沒有實根（有兩個共軛複數根）</td>
+                        <td>與x軸沒有交點</td>
+                        <td>\( x^2 + 2x + 5 = 0 \)<br>\( \Delta = -16 < 0 \)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>2.2 判別式的應用</h3>
+            
+            <div class="question-box">
+                <h4>工作紙題目7解析</h4>
+                <p>若二次方程 \( x^2 - 4x - k = -5 \) 沒有根，求 \( k \) 值的範圍。</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">步驟1：將方程化為標準形式</div>
+                        <p>原方程：\( x^2 - 4x - k = -5 \)</p>
+                        <p>整理得：\( x^2 - 4x - k + 5 = 0 \)</p>
+                        <p>所以 \( a = 1 \), \( b = -4 \), \( c = -k + 5 \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟2：應用「沒有根」的條件</div>
+                        <p>「沒有根」即沒有實數根，所以判別式 Δ < 0：</p>
+                        <p>\[ \Delta = b^2 - 4ac < 0 \]</p>
+                        <p>代入得：\( (-4)^2 - 4(1)(-k + 5) < 0 \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟3：解不等式</div>
+                        <p>\[ 16 - 4(-k + 5) < 0 \]</p>
+                        <p>\[ 16 + 4k - 20 < 0 \]</p>
+                        <p>\[ 4k - 4 < 0 \]</p>
+                        <p>\[ 4k < 4 \]</p>
+                        <p>\[ k < 1 \]</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案與解釋</div>
+                    <p>\( k < 1 \)</p>
+                    <p>當 \( k < 1 \) 時，判別式為負數，方程沒有實數根。</p>
+                </div>
+            </div>
+            
+            <div class="question-box">
+                <h4>工作紙題目11解析</h4>
+                <p>設 \( k \) 是非零常數，\( y = kx^2 - 6x + k \) 的圖像與 \( x \) 軸只接觸於一點。\( k \) 是否有兩個可能值？試解釋你的答案。</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">步驟1：理解題意</div>
+                        <p>「圖像與x軸只接觸於一點」意味著方程 \( kx^2 - 6x + k = 0 \) 有重根，即判別式 Δ = 0。</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟2：計算判別式</div>
+                        <p>\[ \Delta = (-6)^2 - 4(k)(k) = 36 - 4k^2 \]</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟3：設 Δ = 0 並求解</div>
+                        <p>\[ 36 - 4k^2 = 0 \]</p>
+                        <p>\[ 4k^2 = 36 \]</p>
+                        <p>\[ k^2 = 9 \]</p>
+                        <p>\[ k = 3 \quad 或 \quad k = -3 \]</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟4：結論</div>
+                        <p>k有兩個可能值：3和-3，兩個值都滿足條件。</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>是，k有兩個可能值：3和-3。</p>
+                </div>
+            </div>
+            
+            <h3>2.3 判別式與參數範圍</h3>
+            
+            <div class="explanation-box">
+                <h4>根據根的情況求參數範圍</h4>
+                <p>常見問題類型：</p>
+                <ol>
+                    <li>方程有實根 ⇔ \( \Delta \geq 0 \)</li>
+                    <li>方程有兩個相異實根 ⇔ \( \Delta > 0 \)</li>
+                    <li>方程有重根 ⇔ \( \Delta = 0 \)</li>
+                    <li>方程沒有實根 ⇔ \( \Delta < 0 \)</li>
+                </ol>
+                <p>解題步驟：</p>
+                <ul class="math-list">
+                    <li>將方程化為標準形式 \( ax^2 + bx + c = 0 \)</li>
+                    <li>寫出判別式 \( \Delta = b^2 - 4ac \)</li>
+                    <li>根據條件建立不等式或方程</li>
+                    <li>求解參數範圍</li>
+                </ul>
+            </div>
+            
+            <div class="interactive-section">
+                <h3>判別式計算練習</h3>
+                <p>輸入二次方程的係數，計算判別式並判斷根的情況：</p>
+                
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <div class="input-group">
+                            <label for="coeffA">係數 a (a≠0):</label>
+                            <input type="number" id="coeffA" step="any" value="1">
+                        </div>
+                    </div>
+                    
+                    <div class="grid-item">
+                        <div class="input-group">
+                            <label for="coeffB">係數 b:</label>
+                            <input type="number" id="coeffB" step="any" value="-4">
+                        </div>
+                    </div>
+                    
+                    <div class="grid-item">
+                        <div class="input-group">
+                            <label for="coeffC">係數 c:</label>
+                            <input type="number" id="coeffC" step="any" value="3">
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-calc" onclick="calculateDiscriminant()">計算判別式</button>
+                <button class="btn btn-reset" onclick="resetDiscriminant()">重置</button>
+                
+                <div id="discriminant-result" class="result">
+                    <div class="result-title">結果將顯示在這裡</div>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h4>⚠️ 常見錯誤</h4>
+                <ul class="math-list">
+                    <li>忘記判別式公式：\( \Delta = b^2 - 4ac \)（不是 \( \Delta = b^2 - 4ac \) 的其他變體）</li>
+                    <li>沒有將方程化為標準形式就計算判別式</li>
+                    <li>對「沒有實根」理解錯誤：沒有實根 ⇔ \( \Delta < 0 \)，不是 \( \Delta \leq 0 \)</li>
+                    <li>忽略參數為0的特殊情況（如題目中a可能為參數）</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- 第3章：二次函數圖像 -->
+        <section id="chapter3" class="chapter">
+            <h2>第3章：二次函數圖像</h2>
+            
+            <div class="definition">
+                <div class="definition-title">二次函數定義</div>
+                <p>二次函數是形如 \( y = ax^2 + bx + c \) 的函數，其中 \( a \neq 0 \)，其圖像是一條拋物線。</p>
+            </div>
+            
+            <h3>3.1 二次函數圖像的特徵</h3>
+            
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h4>開口方向</h4>
+                    <p>由係數 \( a \) 決定：</p>
+                    <ul>
+                        <li>\( a > 0 \)：開口向上（∪形）</li>
+                        <li>\( a < 0 \)：開口向下（∩形）</li>
+                    </ul>
+                    <div class="note">
+                        <p>記憶技巧：a > 0 像笑臉，開口向上；a < 0 像苦臉，開口向下。</p>
+                    </div>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>頂點</h4>
+                    <p>拋物線的最高點或最低點，坐標為：</p>
+                    <div class="math-formula">
+                        <p>\[ \left( -\frac{b}{2a}, f\left(-\frac{b}{2a}\right) \right) \]</p>
+                    </div>
+                    <p>其中 \( f(x) = ax^2 + bx + c \)。</p>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>對稱軸</h4>
+                    <p>通過頂點的垂直線，方程為：</p>
+                    <div class="math-formula">
+                        <p>\[ x = -\frac{b}{2a} \]</p>
+                    </div>
+                    <p>拋物線關於這條線對稱。</p>
+                </div>
+            </div>
+            
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h4>y截距</h4>
+                    <p>圖像與y軸的交點，當 \( x = 0 \) 時：</p>
+                    <div class="math-formula">
+                        <p>\[ y = c \]</p>
+                    </div>
+                    <p>所以y截距為 \( (0, c) \)。</p>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>x截距</h4>
+                    <p>圖像與x軸的交點，即方程 \( ax^2 + bx + c = 0 \) 的實根。</p>
+                    <p>x截距的數量由判別式決定：</p>
+                    <ul>
+                        <li>\( \Delta > 0 \)：兩個x截距</li>
+                        <li>\( \Delta = 0 \)：一個x截距</li>
+                        <li>\( \Delta < 0 \)：沒有x截距</li>
+                    </ul>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>極值</h4>
+                    <p>二次函數的極大值或極小值就是頂點的y坐標：</p>
+                    <div class="math-formula">
+                        <p>\[ y_{\text{極值}} = f\left(-\frac{b}{2a}\right) \]</p>
+                    </div>
+                    <p>當 \( a > 0 \) 時有極小值，\( a < 0 \) 時有極大值。</p>
+                </div>
+            </div>
+            
+            <h3>3.2 二次函數的不同形式</h3>
+            
+            <div class="formula-box">
+                <h4>一般式</h4>
+                <p>\[ y = ax^2 + bx + c \]</p>
+                <p><strong>優點：</strong>直接顯示y截距 \( c \)，容易計算判別式。</p>
+                <p><strong>缺點：</strong>不容易看出頂點和對稱軸。</p>
+            </div>
+            
+            <div class="formula-box">
+                <h4>頂點式</h4>
+                <p>\[ y = a(x - h)^2 + k \]</p>
+                <p>其中 \( (h, k) \) 是頂點坐標。</p>
+                <p><strong>優點：</strong>直接顯示頂點和對稱軸（\( x = h \)）。</p>
+                <p><strong>轉換方法：</strong>使用配方法將一般式轉為頂點式。</p>
+            </div>
+            
+            <div class="formula-box">
+                <h4>因式式</h4>
+                <p>\[ y = a(x - \alpha)(x - \beta) \]</p>
+                <p>其中 \( \alpha \) 和 \( \beta \) 是x截距（方程的根）。</p>
+                <p><strong>優點：</strong>直接顯示x截距。</p>
+                <p><strong>使用條件：</strong>方程有實根（\( \Delta \geq 0 \)）。</p>
+            </div>
+            
+            <h3>3.3 配方法詳細步驟</h3>
+            
+            <div class="example">
+                <div class="example-title">例題：將一般式化為頂點式</div>
+                <p>將 \( y = 2x^2 - 7x + 5 \) 化為頂點式。</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">步驟1：提取x²的係數</div>
+                        <p>\[ y = 2\left(x^2 - \frac{7}{2}x\right) + 5 \]</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟2：配完全平方</div>
+                        <p>取x係數的一半，平方：\( \left(\frac{7}{4}\right)^2 = \frac{49}{16} \)</p>
+                        <p>\[ y = 2\left[x^2 - \frac{7}{2}x + \frac{49}{16} - \frac{49}{16}\right] + 5 \]</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟3：寫成完全平方形式</div>
+                        <p>\[ y = 2\left[\left(x - \frac{7}{4}\right)^2 - \frac{49}{16}\right] + 5 \]</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟4：展開並化簡</div>
+                        <p>\[ y = 2\left(x - \frac{7}{4}\right)^2 - 2 \times \frac{49}{16} + 5 \]</p>
+                        <p>\[ y = 2\left(x - \frac{7}{4}\right)^2 - \frac{49}{8} + 5 \]</p>
+                        <p>\[ y = 2\left(x - \frac{7}{4}\right)^2 - \frac{49}{8} + \frac{40}{8} \]</p>
+                        <p>\[ y = 2\left(x - \frac{7}{4}\right)^2 - \frac{9}{8} \]</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>頂點式：\( y = 2\left(x - \frac{7}{4}\right)^2 - \frac{9}{8} \)</p>
+                    <p>頂點：\( \left(\frac{7}{4}, -\frac{9}{8}\right) \)</p>
+                    <p>對稱軸：\( x = \frac{7}{4} \)</p>
+                </div>
+            </div>
+            
+            <h3>3.4 已知圖像特徵求函數</h3>
+            
+            <div class="question-box">
+                <h4>工作紙題目20解析</h4>
+                <p>設 \( f(x) \) 為二次函數。已知 \( y = f(x) \) 的圖像的 x 截距為 -3 及 4，而圖像的 y 截距為 24。
+                (a) 求 \( f(x) \)。
+                (b) 寫出 \( y = f(x) \) 的圖像的對稱軸的方程。
+                (c) 由此，或利用其他方法，求 \( y = f(x) \) 的圖像的頂點的坐標。</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">(a) 部分：求 f(x)</div>
+                        <p>已知x截距為 -3 和 4，可設：</p>
+                        <p>\[ f(x) = a(x + 3)(x - 4) \]</p>
+                        <p>已知y截距為24，即 \( f(0) = 24 \)：</p>
+                        <p>\[ f(0) = a(0 + 3)(0 - 4) = a \times 3 \times (-4) = -12a \]</p>
+                        <p>\[ -12a = 24 \]</p>
+                        <p>\[ a = -2 \]</p>
+                        <p>∴ \( f(x) = -2(x + 3)(x - 4) \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">(b) 部分：求對稱軸</div>
+                        <p>拋物線的對稱軸通過兩個x截距的中點：</p>
+                        <p>\[ x = \frac{-3 + 4}{2} = \frac{1}{2} \]</p>
+                        <p>所以對稱軸為 \( x = \frac{1}{2} \)。</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">(c) 部分：求頂點坐標</div>
+                        <p>頂點在對稱軸上，所以 \( x = \frac{1}{2} \)。代入函數：</p>
+                        <p>\[ f\left(\frac{1}{2}\right) = -2\left(\frac{1}{2} + 3\right)\left(\frac{1}{2} - 4\right) \]</p>
+                        <p>\[ = -2 \times \frac{7}{2} \times \left(-\frac{7}{2}\right) \]</p>
+                        <p>\[ = -2 \times \frac{7}{2} \times \left(-\frac{7}{2}\right) = -2 \times \left(-\frac{49}{4}\right) = \frac{49}{2} \]</p>
+                        <p>所以頂點為 \( \left(\frac{1}{2}, \frac{49}{2}\right) \)。</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>(a) \( f(x) = -2(x + 3)(x - 4) \)</p>
+                    <p>(b) 對稱軸：\( x = \frac{1}{2} \)</p>
+                    <p>(c) 頂點：\( \left(\frac{1}{2}, \frac{49}{2}\right) \)</p>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4>📝 二次函數圖像記憶口訣</h4>
+                <ul class="math-list">
+                    <li>a定開口：正上負下</li>
+                    <li>頂點橫標：\( x = -\frac{b}{2a} \)</li>
+                    <li>對稱軸線：過頂點垂直x軸</li>
+                    <li>y截距c：看常數項</li>
+                    <li>x截距根：解方程可得</li>
+                    <li>Δ判交點：正二零一負無</li>
+                </ul>
+            </div>
+            
+            <h3>3.5 二次函數圖像的變換</h3>
+            
+            <div class="explanation-box">
+                <h4>圖像變換規則</h4>
+                <p>對於二次函數 \( y = a(x - h)^2 + k \)：</p>
+                <ul class="math-list">
+                    <li>\( h \) 控制左右平移：\( h > 0 \) 向右移，\( h < 0 \) 向左移</li>
+                    <li>\( k \) 控制上下平移：\( k > 0 \) 向上移，\( k < 0 \) 向下移</li>
+                    <li>\( a \) 控制開口大小和方向：\( |a| \) 越大開口越窄，\( a \) 的正負決定開口方向</li>
+                </ul>
+                <p>從 \( y = x^2 \) 到 \( y = a(x - h)^2 + k \) 的變換：</p>
+                <ol>
+                    <li>橫向平移 \( h \) 單位</li>
+                    <li>縱向平移 \( k \) 單位</li>
+                    <li>垂直拉伸/壓縮 \( |a| \) 倍（若 \( a < 0 \) 則上下翻轉）</li>
+                </ol>
+            </div>
+        </section>
+        
+        <!-- 第4章：直線方程與關係 -->
+        <section id="chapter4" class="chapter">
+            <h2>第4章：直線方程與關係</h2>
+            
+            <div class="definition">
+                <div class="definition-title">直線方程定義</div>
+                <p>在直角坐標平面上，直線可以用線性方程表示，最常見的形式有：</p>
+                <ul>
+                    <li>一般式：\( ax + by + c = 0 \)（\( a, b \) 不同時為0）</li>
+                    <li>斜截式：\( y = mx + c \)（\( m \) 為斜率，\( c \) 為y截距）</li>
+                    <li>點斜式：\( y - y_1 = m(x - x_1) \)（通過點 \( (x_1, y_1) \)，斜率為 \( m \)）</li>
+                </ul>
+            </div>
+            
+            <h3>4.1 直線方程的不同形式</h3>
+            
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h4>一般式</h4>
+                    <p>\[ ax + by + c = 0 \]</p>
+                    <p><strong>斜率：</strong> \( m = -\frac{a}{b} \)（\( b \neq 0 \)）</p>
+                    <p><strong>x截距：</strong> \( x = -\frac{c}{a} \)（\( a \neq 0 \)）</p>
+                    <p><strong>y截距：</strong> \( y = -\frac{c}{b} \)（\( b \neq 0 \)）</p>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>斜截式</h4>
+                    <p>\[ y = mx + c \]</p>
+                    <p><strong>斜率：</strong> \( m \)</p>
+                    <p><strong>y截距：</strong> \( c \)</p>
+                    <p><strong>x截距：</strong> \( x = -\frac{c}{m} \)（\( m \neq 0 \)）</p>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>點斜式</h4>
+                    <p>\[ y - y_1 = m(x - x_1) \]</p>
+                    <p>通過點 \( (x_1, y_1) \)，斜率為 \( m \)</p>
+                    <p>可轉化為斜截式：\( y = mx + (y_1 - mx_1) \)</p>
+                </div>
+            </div>
+            
+            <h3>4.2 兩直線的關係</h3>
+            
+            <div class="formula-box">
+                <h4>平行與垂直的條件</h4>
+                <p>設兩直線 \( L_1 \) 和 \( L_2 \) 的斜率分別為 \( m_1 \) 和 \( m_2 \)：</p>
+                <div class="math-formula">
+                    <p>平行：\( m_1 = m_2 \)</p>
+                    <p>垂直：\( m_1 \times m_2 = -1 \) 或 \( m_1 = -\frac{1}{m_2} \)</p>
+                </div>
+                <p><strong>特殊情況：</strong></p>
+                <ul>
+                    <li>垂直線（斜率不存在）與水平線（斜率為0）互相垂直</li>
+                    <li>兩條垂直線（斜率都不存在）互相平行</li>
+                </ul>
+            </div>
+            
+            <div class="question-box">
+                <h4>工作紙題目18解析</h4>
+                <p>求常數 \( h \) 使得 \( L_1: hx + 2y + 16 = 0 \) 和 \( L_2: 2x - 3y - 8 = 0 \) 互相垂直。</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">步驟1：找出兩直線的斜率</div>
+                        <p>對於 \( L_1: hx + 2y + 16 = 0 \)，斜率 \( m_1 = -\frac{h}{2} \)</p>
+                        <p>對於 \( L_2: 2x - 3y - 8 = 0 \)，斜率 \( m_2 = -\frac{2}{-3} = \frac{2}{3} \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟2：應用垂直條件</div>
+                        <p>兩直線垂直時，斜率相乘等於 -1：</p>
+                        <p>\[ m_1 \times m_2 = -1 \]</p>
+                        <p>\[ \left(-\frac{h}{2}\right) \times \left(\frac{2}{3}\right) = -1 \]</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟3：解方程求 \( h \)</div>
+                        <p>\[ -\frac{2h}{6} = -1 \]</p>
+                        <p>\[ -\frac{h}{3} = -1 \]</p>
+                        <p>\[ h = 3 \]</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>\( h = 3 \)</p>
+                </div>
+            </div>
+            
+            <div class="question-box">
+                <h4>工作紙題目12解析</h4>
+                <p>直線 \( L_1 \) 的 y 截距為 5 及 \( L_2 \) 的斜率為 4，兩直線平行，求 \( L_1 \) 的方程。</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">步驟1：應用平行條件</div>
+                        <p>兩直線平行，斜率相等。已知 \( L_2 \) 的斜率為 4，所以 \( L_1 \) 的斜率也是 4。</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟2：使用斜截式</div>
+                        <p>已知 \( L_1 \) 的 y 截距為 5，斜率為 4，所以：</p>
+                        <p>\[ y = 4x + 5 \]</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>\( L_1 \) 的方程：\( y = 4x + 5 \)</p>
+                </div>
+            </div>
+            
+            <h3>4.3 求直線方程的方法</h3>
+            
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h4>已知一點和斜率</h4>
+                    <p>使用點斜式：\( y - y_1 = m(x - x_1) \)</p>
+                    <p>例：已知點 (2, 3)，斜率 4，則方程為：</p>
+                    <p>\( y - 3 = 4(x - 2) \)</p>
+                    <p>化簡得：\( y = 4x - 5 \)</p>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>已知兩點</h4>
+                    <p>步驟：</p>
+                    <ol>
+                        <li>計算斜率：\( m = \frac{y_2 - y_1}{x_2 - x_1} \)</li>
+                        <li>使用點斜式（任選一點）</li>
+                    </ol>
+                    <p>例：已知 (1, 2) 和 (4, 5)，斜率 \( m = \frac{5-2}{4-1} = 1 \)</p>
+                    <p>方程：\( y - 2 = 1(x - 1) \) 即 \( y = x + 1 \)</p>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>已知截距</h4>
+                    <p>若已知 x 截距為 \( a \)，y 截距為 \( b \)（\( a, b \neq 0 \)），則：</p>
+                    <p>\[ \frac{x}{a} + \frac{y}{b} = 1 \]</p>
+                    <p>例：x截距為3，y截距為2，則方程為：</p>
+                    <p>\[ \frac{x}{3} + \frac{y}{2} = 1 \]</p>
+                    <p>化簡得：\( 2x + 3y = 6 \)</p>
+                </div>
+            </div>
+            
+            <h3>4.4 直線的交點與面積</h3>
+            
+            <div class="question-box">
+                <h4>工作紙題目19解析</h4>
+                <p>在一直角坐標平面上，點 A 的坐標為 (2, 3)，而直線 \( L_1 \) 的方程是 \( 3x + 2y - 12 = 0 \)。
+                (a) 證明 A 位於 \( L_1 \) 上。
+                (b) 直線 \( L_2 \) 垂直於 \( L_1 \) 且通過 A。
+                (i) 求 \( L_2 \) 的方程。
+                (ii) 求出 \( L_1 \)、\( L_2 \) 與 y 軸所圍成的區域的面積。</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">(a) 部分：證明 A 在 \( L_1 \) 上</div>
+                        <p>將 A(2, 3) 代入 \( L_1 \) 方程：</p>
+                        <p>左邊 = \( 3(2) + 2(3) - 12 = 6 + 6 - 12 = 0 \)</p>
+                        <p>等於右邊 0，所以 A 在 \( L_1 \) 上。</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">(b)(i) 部分：求 \( L_2 \) 的方程</div>
+                        <p>\( L_1 \) 的斜率：\( m_1 = -\frac{3}{2} \)</p>
+                        <p>\( L_2 \perp L_1 \)，所以 \( m_2 = -\frac{1}{m_1} = \frac{2}{3} \)</p>
+                        <p>\( L_2 \) 通過 A(2, 3)，使用點斜式：</p>
+                        <p>\( y - 3 = \frac{2}{3}(x - 2) \)</p>
+                        <p>化簡得：\( y = \frac{2}{3}x + \frac{5}{3} \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">(b)(ii) 部分：求面積</div>
+                        <p>需要求 \( L_1 \)、\( L_2 \) 與 y 軸圍成的三角形面積。</p>
+                        <p>先求 \( L_1 \) 與 y 軸的交點：令 \( x = 0 \)，得 \( y = 6 \) → 點 B(0, 6)</p>
+                        <p>求 \( L_2 \) 與 y 軸的交點：令 \( x = 0 \)，得 \( y = \frac{5}{3} \) → 點 C(0, \(\frac{5}{3}\))</p>
+                        <p>頂點 A(2, 3)，B(0, 6)，C(0, \(\frac{5}{3}\))</p>
+                        <p>三角形 ABC 的底邊 BC 在 y 軸上，長度為：</p>
+                        <p>\( BC = 6 - \frac{5}{3} = \frac{13}{3} \)</p>
+                        <p>高為 A 的 x 坐標：2</p>
+                        <p>面積 = \( \frac{1}{2} \times \frac{13}{3} \times 2 = \frac{13}{3} \)</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>(a) 證明略（見上面步驟）</p>
+                    <p>(b)(i) \( L_2 \) 的方程：\( y = \frac{2}{3}x + \frac{5}{3} \)</p>
+                    <p>(b)(ii) 面積：\( \frac{13}{3} \) 平方單位</p>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4>📝 直線方程解題技巧</h4>
+                <ul class="math-list">
+                    <li>已知兩點求方程：先算斜率，再用點斜式</li>
+                    <li>檢查點是否在直線上：代入坐標驗證方程是否成立</li>
+                    <li>平行線：斜率相等</li>
+                    <li>垂直線：斜率相乘為 -1（注意特殊情況）</li>
+                    <li>求交點：解聯立方程</li>
+                    <li>三角形面積：可用底×高÷2，或行列式公式</li>
+                </ul>
+            </div>
+            
+            <h3>4.5 距離公式與中點公式</h3>
+            
+            <div class="explanation-box">
+                <h4>重要公式</h4>
+                <p><strong>兩點距離公式：</strong></p>
+                <div class="math-formula">
+                    <p>設 \( A(x_1, y_1) \) 和 \( B(x_2, y_2) \)，則 \( AB = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \)</p>
+                </div>
+                
+                <p><strong>中點公式：</strong></p>
+                <div class="math-formula">
+                    <p>設 \( A(x_1, y_1) \) 和 \( B(x_2, y_2) \)，則 AB 的中點 M 坐標為：</p>
+                    <p>\[ M\left( \frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2} \right) \]</p>
+                </div>
+                
+                <p><strong>點到直線距離公式（選修）：</strong></p>
+                <div class="math-formula">
+                    <p>點 \( P(x_0, y_0) \) 到直線 \( ax + by + c = 0 \) 的距離為：</p>
+                    <p>\[ d = \frac{|ax_0 + by_0 + c|}{\sqrt{a^2 + b^2}} \]</p>
+                </div>
+            </div>
+            
+            <div class="interactive-section">
+                <h3>直線方程練習</h3>
+                <p>根據不同已知條件求直線方程：</p>
+                
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <h5>已知一點和斜率</h5>
+                        <div class="input-group">
+                            <label>點坐標 (x₁, y₁):</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="number" id="pointX" placeholder="x₁" value="2" style="flex: 1;">
+                                <input type="number" id="pointY" placeholder="y₁" value="3" style="flex: 1;">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>斜率 m:</label>
+                            <input type="number" id="slopeM" step="any" value="4">
+                        </div>
+                        <button class="btn" onclick="findLineFromPointSlope()">求直線方程</button>
+                        <div id="point-slope-result" class="result" style="margin-top: 15px; min-height: 60px;"></div>
+                    </div>
+                    
+                    <div class="grid-item">
+                        <h5>已知兩點</h5>
+                        <div class="input-group">
+                            <label>點1 (x₁, y₁):</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="number" id="point1X" placeholder="x₁" value="1" style="flex: 1;">
+                                <input type="number" id="point1Y" placeholder="y₁" value="2" style="flex: 1;">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>點2 (x₂, y₂):</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="number" id="point2X" placeholder="x₂" value="4" style="flex: 1;">
+                                <input type="number" id="point2Y" placeholder="y₂" value="5" style="flex: 1;">
+                            </div>
+                        </div>
+                        <button class="btn" onclick="findLineFromTwoPoints()">求直線方程</button>
+                        <div id="two-point-result" class="result" style="margin-top: 15px; min-height: 60px;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 第5章：複數運算 -->
+        <section id="chapter5" class="chapter">
+            <h2>第5章：複數運算</h2>
+            
+            <div class="definition">
+                <div class="definition-title">複數定義</div>
+                <p>複數是形如 \( a + bi \) 的數，其中 \( a \) 和 \( b \) 都是實數，\( i \) 是虛數單位，滿足 \( i^2 = -1 \)。</p>
+                <ul>
+                    <li>\( a \) 稱為實部（Real part）</li>
+                    <li>\( b \) 稱為虛部（Imaginary part）</li>
+                    <li>當 \( b = 0 \) 時，複數就是實數</li>
+                    <li>當 \( a = 0 \) 且 \( b \neq 0 \) 時，複數是純虛數</li>
+                </ul>
+            </div>
+            
+            <h3>5.1 複數的基本運算</h3>
+            
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h4>加法與減法</h4>
+                    <p>實部與實部相加減，虛部與虛部相加減：</p>
+                    <div class="math-formula">
+                        <p>\( (a + bi) + (c + di) = (a + c) + (b + d)i \)</p>
+                        <p>\( (a + bi) - (c + di) = (a - c) + (b - d)i \)</p>
+                    </div>
+                    <div class="example">
+                        <p>例：\( (-1 + 4i) + (3 - 9i) = (-1+3) + (4-9)i = 2 - 5i \)</p>
+                    </div>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>乘法</h4>
+                    <p>使用分配律，記得 \( i^2 = -1 \)：</p>
+                    <div class="math-formula">
+                        <p>\( (a + bi)(c + di) = ac + adi + bci + bdi^2 \)</p>
+                        <p>\( = (ac - bd) + (ad + bc)i \)</p>
+                    </div>
+                    <div class="example">
+                        <p>例：\( (2 - i)(3 - i) = 6 - 2i - 3i + i^2 \)</p>
+                        <p>\( = 6 - 5i - 1 = 5 - 5i \)</p>
+                    </div>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>共軛複數</h4>
+                    <p>複數 \( z = a + bi \) 的共軛複數記為 \( \overline{z} = a - bi \)。</p>
+                    <p><strong>性質：</strong></p>
+                    <ul>
+                        <li>\( z + \overline{z} = 2a \)（實數）</li>
+                        <li>\( z - \overline{z} = 2bi \)（純虛數）</li>
+                        <li>\( z \cdot \overline{z} = a^2 + b^2 \)（實數）</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3>5.2 複數的除法</h3>
+            
+            <div class="explanation-box">
+                <h4>除法運算方法</h4>
+                <p>要計算 \( \frac{a+bi}{c+di} \)（\( c+di \neq 0 \)），分子分母同時乘以分母的共軛複數：</p>
+                <div class="math-formula">
+                    <p>\[ \frac{a+bi}{c+di} = \frac{(a+bi)(c-di)}{(c+di)(c-di)} = \frac{(ac+bd) + (bc-ad)i}{c^2+d^2} \]</p>
+                </div>
+                <p>這樣分母就變成了實數，可以分離實部和虛部。</p>
+                
+                <div class="example">
+                    <p><strong>例：</strong>計算 \( \frac{3+4i}{1-2i} \)</p>
+                    <p>解：\( \frac{3+4i}{1-2i} = \frac{(3+4i)(1+2i)}{(1-2i)(1+2i)} = \frac{3+6i+4i+8i^2}{1^2+2^2} \)</p>
+                    <p>\( = \frac{3+10i-8}{5} = \frac{-5+10i}{5} = -1+2i \)</p>
+                </div>
+            </div>
+            
+            <h3>5.3 複數與二次方程</h3>
+            
+            <div class="formula-box">
+                <h4>二次方程的複數根</h4>
+                <p>當二次方程 \( ax^2 + bx + c = 0 \) 的判別式 \( \Delta < 0 \) 時，方程沒有實根，但有兩個共軛複數根：</p>
+                <div class="math-formula">
+                    <p>\[ x = \frac{-b \pm \sqrt{-\Delta} \, i}{2a} \]</p>
+                </div>
+                <p>其中 \( \sqrt{-\Delta} \) 是正實數。</p>
+            </div>
+            
+            <div class="example">
+                <div class="example-title">例題：求二次方程的複數根</div>
+                <p>解方程：\( x^2 - 4x + 13 = 0 \)</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">步驟1：計算判別式</div>
+                        <p>\( \Delta = (-4)^2 - 4(1)(13) = 16 - 52 = -36 < 0 \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟2：應用公式求複數根</div>
+                        <p>\[ x = \frac{4 \pm \sqrt{-36} \, i}{2} = \frac{4 \pm 6i}{2} = 2 \pm 3i \]</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>方程的根為 \( 2 + 3i \) 和 \( 2 - 3i \)。</p>
+                </div>
+            </div>
+            
+            <h3>5.4 複數的幾何意義</h3>
+            
+            <div class="explanation-box">
+                <h4>複平面</h4>
+                <p>複數 \( a + bi \) 可以用複平面上的點 \( (a, b) \) 表示：</p>
+                <ul class="math-list">
+                    <li>橫軸是實軸，表示實部</li>
+                    <li>縱軸是虛軸，表示虛部</li>
+                    <li>複數的模（絕對值）：\( |a+bi| = \sqrt{a^2+b^2} \)，表示點到原點的距離</li>
+                    <li>複數的輻角：與正實軸的夾角（可用三角函數表示）</li>
+                </ul>
+            </div>
+            
+            <div class="question-box">
+                <h4>工作紙題目16解析</h4>
+                <p>化簡下列各題，並以 \( a + bi \) 的形式表示，其中 \( a \) 和 \( b \) 都是實數。</p>
+                <p>(a) \( (-1 + 4i) + (3 - 9i) \)</p>
+                <p>(b) \( (2 - i)(3 - i) \)</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">(a) 部分：加法</div>
+                        <p>實部相加：\( -1 + 3 = 2 \)</p>
+                        <p>虛部相加：\( 4i + (-9i) = -5i \)</p>
+                        <p>結果：\( 2 - 5i \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">(b) 部分：乘法</div>
+                        <p>使用分配律：</p>
+                        <p>\( (2 - i)(3 - i) = 2 \times 3 + 2 \times (-i) + (-i) \times 3 + (-i) \times (-i) \)</p>
+                        <p>\( = 6 - 2i - 3i + i^2 \)</p>
+                        <p>因為 \( i^2 = -1 \)，所以：</p>
+                        <p>\( = 6 - 5i - 1 = 5 - 5i \)</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>(a) \( 2 - 5i \)</p>
+                    <p>(b) \( 5 - 5i \)</p>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4>📝 複數運算技巧</h4>
+                <ul class="math-list">
+                    <li>牢記 \( i^2 = -1 \)，這是化簡複數的關鍵</li>
+                    <li>加減法：實部與實部運算，虛部與虛部運算</li>
+                    <li>乘法：使用分配律，然後將 \( i^2 \) 替換為 -1</li>
+                    <li>除法：分子分母同乘分母的共軛複數</li>
+                    <li>檢查答案：確保結果是 \( a+bi \) 形式，且 \( a, b \) 為實數</li>
+                </ul>
+            </div>
+            
+            <div class="interactive-section">
+                <h3>複數運算練習</h3>
+                <p>計算以下複數運算：</p>
+                
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <h5>複數加法</h5>
+                        <div class="input-group">
+                            <label>第一個複數 (a+bi):</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="number" id="c1Real" placeholder="實部 a" value="-1" style="flex: 1;">
+                                <input type="number" id="c1Imag" placeholder="虛部 b" value="4" style="flex: 1;">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>第二個複數 (c+di):</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="number" id="c2Real" placeholder="實部 c" value="3" style="flex: 1;">
+                                <input type="number" id="c2Imag" placeholder="虛部 d" value="-9" style="flex: 1;">
+                            </div>
+                        </div>
+                        <button class="btn" onclick="calculateComplex('add')">計算加法</button>
+                        <div id="complex-add-result" class="result" style="margin-top: 15px; min-height: 60px;"></div>
+                    </div>
+                    
+                    <div class="grid-item">
+                        <h5>複數乘法</h5>
+                        <div class="input-group">
+                            <label>第一個複數 (a+bi):</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="number" id="c3Real" placeholder="實部 a" value="2" style="flex: 1;">
+                                <input type="number" id="c3Imag" placeholder="虛部 b" value="-1" style="flex: 1;">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>第二個複數 (c+di):</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="number" id="c4Real" placeholder="實部 c" value="3" style="flex: 1;">
+                                <input type="number" id="c4Imag" placeholder="虛部 d" value="-1" style="flex: 1;">
+                            </div>
+                        </div>
+                        <button class="btn" onclick="calculateComplex('multiply')">計算乘法</button>
+                        <div id="complex-multiply-result" class="result" style="margin-top: 15px; min-height: 60px;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 第6章：應用題解析 -->
+        <section id="chapter6" class="chapter">
+            <h2>第6章：應用題解析</h2>
+            
+            <div class="definition">
+                <div class="definition-title">應用題解題策略</div>
+                <p>數學應用題將數學知識應用於實際情境，解題步驟：</p>
+                <ol>
+                    <li>仔細閱讀題目，理解情境</li>
+                    <li>識別已知量和未知量</li>
+                    <li>建立數學模型（方程、不等式等）</li>
+                    <li>解方程或不等式</li>
+                    <li>檢驗答案是否符合實際情境</li>
+                    <li>寫出完整答案，包括單位</li>
+                </ol>
+            </div>
+            
+            <h3>6.1 盈利與虧蝕問題</h3>
+            
+            <div class="formula-box">
+                <h4>盈利與虧蝕公式</h4>
+                <div class="math-formula">
+                    <p>標價 × 折扣率 = 售價</p>
+                    <p>售價 - 成本 = 盈利（若為正）或虧蝕（若為負）</p>
+                    <p>盈利百分率 = \( \frac{\text{售價 - 成本}}{\text{成本}} \times 100\% \)</p>
+                    <p>虧蝕百分率 = \( \frac{\text{成本 - 售價}}{\text{成本}} \times 100\% \)</p>
+                </div>
+                <p>注意：百分率的分母是成本，不是售價！</p>
+            </div>
+            
+            <div class="question-box">
+                <h4>工作紙題目4解析</h4>
+                <p>某手袋的標價為 $500。現該手袋以其標價九折售出。
+                (a) 求該手袋的售價。
+                (b) 若該手袋獲利 $90，求該手袋的盈利百分率。</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">(a) 部分：計算售價</div>
+                        <p>標價九折 = 標價 × 90% = 標價 × 0.9</p>
+                        <p>售價 = $500 × 0.9 = $450</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">(b) 部分：計算盈利百分率</div>
+                        <p>獲利 = 售價 - 成本</p>
+                        <p>已知獲利 = $90，售價 = $450</p>
+                        <p>成本 = 售價 - 獲利 = $450 - $90 = $360</p>
+                        <p>盈利百分率 = \( \frac{\text{獲利}}{\text{成本}} \times 100\% \)</p>
+                        <p>盈利百分率 = \( \frac{90}{360} \times 100\% = 25\% \)</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>(a) 售價 = $450</p>
+                    <p>(b) 盈利百分率 = 25%</p>
+                </div>
+            </div>
+            
+            <h3>6.2 幾何應用題</h3>
+            
+            <div class="formula-box">
+                <h4>常見幾何公式</h4>
+                <ul>
+                    <li>三角形面積：\( \frac{1}{2} \times \text{底} \times \text{高} \)</li>
+                    <li>直角三角形面積：\( \frac{1}{2} \times \text{兩直角邊的乘積} \)</li>
+                    <li>長方形面積：長 × 寬</li>
+                    <li>圓面積：\( \pi r^2 \)</li>
+                    <li>圓柱體體積：\( \pi r^2 h \)</li>
+                    <li>球體體積：\( \frac{4}{3} \pi r^3 \)</li>
+                </ul>
+            </div>
+            
+            <div class="question-box">
+                <h4>工作紙選擇題3解析</h4>
+                <p>圖中的直角三角形的面積是 24 cm²。下列哪個方程可用來求 \( x \)？</p>
+                <p>已知直角邊為 \( 2x \) cm 和 \( (3x-1) \) cm，斜邊為 \( (3x+1) \) cm。</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">步驟1：應用直角三角形面積公式</div>
+                        <p>直角三角形面積 = \( \frac{1}{2} \times \text{直角邊1} \times \text{直角邊2} \)</p>
+                        <p>面積 = \( \frac{1}{2} \times (2x) \times (3x-1) \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟2：建立方程</div>
+                        <p>已知面積為 24 cm²，所以：</p>
+                        <p>\( \frac{1}{2} \times 2x \times (3x-1) = 24 \)</p>
+                        <p>化簡得：\( x(3x-1) = 24 \)</p>
+                        <p>即：\( 3x^2 - x - 24 = 0 \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟3：對照選項</div>
+                        <p>原方程 \( \frac{1}{2} \times 2x \times (3x-1) = 24 \) 可化為：</p>
+                        <p>\( 2x(3x-1) = 48 \)</p>
+                        <p>對應選項 B。</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>B. \( 2x(3x-1) = 48 \)</p>
+                </div>
+            </div>
+            
+            <h3>6.3 數量關係問題</h3>
+            
+            <div class="question-box">
+                <h4>工作紙題目5解析</h4>
+                <p>某禮品包內只有牛油曲奇及朱古力曲奇共 120 塊。該禮品包內有 5 個盒且每個盒均有相同數目的曲奇。在每個盒內，牛油曲奇均較朱古力曲奇多 6 塊。該禮品包內有多少塊朱古力曲奇？</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">步驟1：分析已知信息</div>
+                        <p>總曲奇數：120塊</p>
+                        <p>盒數：5盒</p>
+                        <p>每盒曲奇數相同</p>
+                        <p>每盒中：牛油曲奇數 = 朱古力曲奇數 + 6</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟2：計算每盒曲奇數</div>
+                        <p>每盒曲奇數 = 總曲奇數 ÷ 盒數 = 120 ÷ 5 = 24塊</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟3：設未知數列方程</div>
+                        <p>設每盒朱古力曲奇為 \( y \) 塊，則每盒牛油曲奇為 \( y+6 \) 塊。</p>
+                        <p>每盒總數：\( y + (y+6) = 24 \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟4：解方程</div>
+                        <p>\( 2y + 6 = 24 \)</p>
+                        <p>\( 2y = 18 \)</p>
+                        <p>\( y = 9 \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟5：計算總朱古力曲奇數</div>
+                        <p>每盒朱古力曲奇：9塊</p>
+                        <p>總朱古力曲奇數：9 × 5 = 45塊</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>禮品包內有 45 塊朱古力曲奇。</p>
+                </div>
+            </div>
+            
+            <h3>6.4 混合問題</h3>
+            
+            <div class="explanation-box">
+                <h4>混合問題解題策略</h4>
+                <p>混合問題通常涉及兩種或多種不同性質的物品混合，常見類型：</p>
+                <ol>
+                    <li>濃度問題：兩種不同濃度的溶液混合</li>
+                    <li>價格問題：兩種不同價格的商品混合</li>
+                    <li>速度問題：不同速度的行程問題</li>
+                </ol>
+                <p>解題關鍵：找到不變量（總量、總價、總距離等）建立方程。</p>
+            </div>
+            
+            <div class="example">
+                <div class="example-title">例題：混合問題</div>
+                <p>有兩種茶葉，甲種每公斤$80，乙種每公斤$120。現將兩種茶葉混合成100公斤的混合茶葉，每公斤售價$100。問需要甲、乙兩種茶葉各多少公斤？</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">步驟1：設未知數</div>
+                        <p>設甲種茶葉 \( x \) 公斤，則乙種茶葉 \( (100-x) \) 公斤。</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟2：建立方程</div>
+                        <p>總價值不變：甲種價值 + 乙種價值 = 混合後價值</p>
+                        <p>\( 80x + 120(100-x) = 100 \times 100 \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟3：解方程</div>
+                        <p>\( 80x + 12000 - 120x = 10000 \)</p>
+                        <p>\( -40x = -2000 \)</p>
+                        <p>\( x = 50 \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟4：得出答案</div>
+                        <p>甲種茶葉：50公斤</p>
+                        <p>乙種茶葉：100-50 = 50公斤</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>需要甲種茶葉50公斤，乙種茶葉50公斤。</p>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4>📝 應用題解題技巧</h4>
+                <ul class="math-list">
+                    <li>仔細閱讀題目，劃出關鍵信息</li>
+                    <li>定義清晰的變量，必要時使用表格整理</li>
+                    <li>根據題意建立方程，注意單位一致</li>
+                    <li>解方程後檢驗答案是否符合實際情境</li>
+                    <li>盈利問題：注意百分率的分母是成本</li>
+                    <li>幾何問題：畫圖幫助理解</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- 第7章：公式變換與因式分解 -->
+        <section id="chapter7" class="chapter">
+            <h2>第7章：公式變換與因式分解</h2>
+            
+            <div class="definition">
+                <div class="definition-title">公式變換</div>
+                <p>公式變換是將公式中的某個變量表示為其他變量的函數，即「使x成為公式的主項」。</p>
+            </div>
+            
+            <h3>7.1 公式變換的基本技巧</h3>
+            
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h4>基本原則</h4>
+                    <ul>
+                        <li>將目標變量單獨放在等號一側</li>
+                        <li>使用等式的基本性質：兩邊同時加、減、乘、除同一數（不為0）</li>
+                        <li>必要時使用交叉相乘</li>
+                        <li>處理平方根時兩邊平方</li>
+                    </ul>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>常見類型</h4>
+                    <ol>
+                        <li>線性公式：\( ax + by = c \) → 使x為主項</li>
+                        <li>分式公式：\( \frac{x}{a} + \frac{y}{b} = 1 \) → 使x為主項</li>
+                        <li>根式公式：\( \sqrt{x+a} = y \) → 使x為主項</li>
+                        <li>二次公式：\( ax^2 + bx + c = y \) → 使x為主項</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="question-box">
+                <h4>工作紙題目2解析</h4>
+                <p>令 \( x \) 成為公式 \( \frac{4}{7} = \frac{8y}{x-y} \) 的主項。</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">步驟1：交叉相乘</div>
+                        <p>\( \frac{4}{7} = \frac{8y}{x-y} \)</p>
+                        <p>交叉相乘：\( 4(x-y) = 7 \times 8y \)</p>
+                        <p>\( 4(x-y) = 56y \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟2：展開括號</div>
+                        <p>\( 4x - 4y = 56y \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟3：將x項移到一側</div>
+                        <p>\( 4x = 56y + 4y \)</p>
+                        <p>\( 4x = 60y \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟4：解出x</div>
+                        <p>\( x = \frac{60y}{4} \)</p>
+                        <p>\( x = 15y \)</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>\( x = 15y \)</p>
+                </div>
+            </div>
+            
+            <h3>7.2 因式分解技巧</h3>
+            
+            <div class="formula-box">
+                <h4>因式分解方法總結</h4>
+                <ol>
+                    <li><strong>提取公因式：</strong>找出各項的公因式提出來</li>
+                    <li><strong>分組分解法：</strong>將多項式分組後分別分解</li>
+                    <li><strong>十字相乘法：</strong>適用於二次三項式 \( ax^2 + bx + c \)</li>
+                    <li><strong>公式法：</strong>
+                        <ul>
+                            <li>平方差公式：\( a^2 - b^2 = (a+b)(a-b) \)</li>
+                            <li>完全平方公式：\( a^2 \pm 2ab + b^2 = (a \pm b)^2 \)</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            
+            <div class="question-box">
+                <h4>工作紙題目3解析</h4>
+                <p>因式分解</p>
+                <p>(a) \( 4x^2 - 19xy - 5y^2 \)</p>
+                <p>(b) \( 4x^2 - 19xy - 5y^2 + 5x - 25y \)</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">(a) 部分：十字相乘法</div>
+                        <p>將 \( 4x^2 - 19xy - 5y^2 \) 看作關於 \( x \) 的二次式，\( y \) 視為常數：</p>
+                        <p>需要分解 \( 4x^2 - 19xy - 5y^2 \)</p>
+                        <p>尋找兩個數，乘積為 \( 4 \times (-5) = -20 \)，和為 -19</p>
+                        <p>這兩個數是 -20 和 1</p>
+                        <p>所以：\( 4x^2 - 19xy - 5y^2 = 4x^2 - 20xy + xy - 5y^2 \)</p>
+                        <p>分組：\( (4x^2 - 20xy) + (xy - 5y^2) \)</p>
+                        <p>提取公因式：\( 4x(x - 5y) + y(x - 5y) \)</p>
+                        <p>結果：\( (x - 5y)(4x + y) \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">(b) 部分：分組分解法</div>
+                        <p>\( 4x^2 - 19xy - 5y^2 + 5x - 25y \)</p>
+                        <p>利用(a)的结果：\( 4x^2 - 19xy - 5y^2 = (x - 5y)(4x + y) \)</p>
+                        <p>原式 = \( (x - 5y)(4x + y) + 5x - 25y \)</p>
+                        <p>觀察後兩項：\( 5x - 25y = 5(x - 5y) \)</p>
+                        <p>所以原式 = \( (x - 5y)(4x + y) + 5(x - 5y) \)</p>
+                        <p>提取公因式 \( (x - 5y) \)：</p>
+                        <p>\( (x - 5y)[(4x + y) + 5] \)</p>
+                        <p>化簡：\( (x - 5y)(4x + y + 5) \)</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>(a) \( (x - 5y)(4x + y) \)</p>
+                    <p>(b) \( (x - 5y)(4x + y + 5) \)</p>
+                </div>
+            </div>
+            
+            <h3>7.3 指數運算與化簡</h3>
+            
+            <div class="formula-box">
+                <h4>指數定律</h4>
+                <div class="math-formula">
+                    <p>1. \( a^m \times a^n = a^{m+n} \)</p>
+                    <p>2. \( \frac{a^m}{a^n} = a^{m-n} \)（\( a \neq 0 \)）</p>
+                    <p>3. \( (a^m)^n = a^{mn} \)</p>
+                    <p>4. \( (ab)^n = a^n b^n \)</p>
+                    <p>5. \( \left(\frac{a}{b}\right)^n = \frac{a^n}{b^n} \)（\( b \neq 0 \)）</p>
+                    <p>6. \( a^{-n} = \frac{1}{a^n} \)（\( a \neq 0 \)）</p>
+                    <p>7. \( a^0 = 1 \)（\( a \neq 0 \)）</p>
+                </div>
+            </div>
+            
+            <div class="question-box">
+                <h4>工作紙題目1解析</h4>
+                <p>化簡 \( \frac{4m^{-2}n^7}{-5m^8n^{-5}} \)，並以正指數表示答案。</p>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <div class="step-title">步驟1：分開處理係數和變量</div>
+                        <p>係數：\( \frac{4}{-5} = -\frac{4}{5} \)</p>
+                        <p>m的部分：\( \frac{m^{-2}}{m^8} = m^{-2-8} = m^{-10} \)</p>
+                        <p>n的部分：\( \frac{n^7}{n^{-5}} = n^{7-(-5)} = n^{12} \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟2：組合結果</div>
+                        <p>\( -\frac{4}{5} \times m^{-10} \times n^{12} \)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">步驟3：將負指數化為正指數</div>
+                        <p>\( m^{-10} = \frac{1}{m^{10}} \)</p>
+                        <p>所以結果為：\( -\frac{4n^{12}}{5m^{10}} \)</p>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <div class="answer-title">答案</div>
+                    <p>\( -\frac{4n^{12}}{5m^{10}} \)</p>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4>📝 公式變換與因式分解技巧</h4>
+                <ul class="math-list">
+                    <li>公式變換時，逐步分離目標變量，避免跳步</li>
+                    <li>因式分解先看是否有公因式，再看能否用公式</li>
+                    <li>十字相乘法：先分解首尾係數的乘積，再找合適的組合</li>
+                    <li>指數運算：注意負指數和零指數的處理</li>
+                    <li>分式化簡：分子分母分別化簡，注意約分</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- 第8章：考試技巧與常見錯誤 -->
+        <section id="chapter8" class="chapter">
+            <h2>第8章：考試技巧與常見錯誤</h2>
+            
+            <div class="definition">
+                <div class="definition-title">考試策略</div>
+                <p>數學考試不僅測試數學知識，也測試解題策略和時間管理能力。</p>
+            </div>
+            
+            <h3>8.1 考試時間分配</h3>
+            
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h4>審題階段（5-10分鐘）</h4>
+                    <ul>
+                        <li>快速瀏覽全卷，了解題目分佈</li>
+                        <li>標記有把握的題目和難題</li>
+                        <li>規劃答題順序：先易後難</li>
+                    </ul>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>答題階段</h4>
+                    <ul>
+                        <li>選擇題：每題約2-3分鐘</li>
+                        <li>短題目：每題約5-8分鐘</li>
+                        <li>長題目：每題約10-15分鐘</li>
+                        <li>留出10-15分鐘檢查</li>
+                    </ul>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>檢查階段</h4>
+                    <ul>
+                        <li>檢查計算錯誤</li>
+                        <li>驗算答案合理性</li>
+                        <li>確認單位和格式</li>
+                        <li>檢查是否有漏題</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3>8.2 常見錯誤與避免方法</h3>
+            
+            <div class="warning-box">
+                <h4>代數運算錯誤</h4>
+                <ul class="math-list">
+                    <li><strong>錯誤：</strong>符號錯誤，如 \( -a^2 \) 誤為 \( (-a)^2 \)</li>
+                    <li><strong>避免方法：</strong>注意運算優先級，必要時加括號</li>
+                    
+                    <li><strong>錯誤：</strong>分配律使用錯誤，如 \( a(b+c) = ab + c \)</li>
+                    <li><strong>避免方法：</strong>仔細檢查每一項是否都乘到</li>
+                    
+                    <li><strong>錯誤：</strong>分式運算錯誤，如 \( \frac{a}{b} + \frac{c}{d} = \frac{a+c}{b+d} \)</li>
+                    <li><strong>避免方法：</strong>記住通分規則，不要直接相加分子分母</li>
+                </ul>
+            </div>
+            
+            <div class="warning-box">
+                <h4>二次方程相關錯誤</h4>
+                <ul class="math-list">
+                    <li><strong>錯誤：</strong>判別式公式記錯：\( \Delta = b^2 - 4ac \)（不是 \( b^2 - 4ac \) 的其他形式）</li>
+                    <li><strong>避免方法：</strong>牢記標準公式，考前默寫幾遍</li>
+                    
+                    <li><strong>錯誤：</strong>「沒有實根」誤用 \( \Delta \leq 0 \)</li>
+                    <li><strong>避免方法：</strong>記住：沒有實根 ⇔ \( \Delta < 0 \)</li>
+                    
+                    <li><strong>錯誤：</strong>忽略 \( a \neq 0 \) 的條件</li>
+                    <li><strong>避免方法：</strong>題目說是二次方程時，注意 \( a \neq 0 \)</li>
+                </ul>
+            </div>
+            
+            <div class="warning-box">
+                <h4>函數圖像相關錯誤</h4>
+                <ul class="math-list">
+                    <li><strong>錯誤：</strong>混淆頂點坐標公式</li>
+                    <li><strong>避免方法：</strong>頂點x坐標：\( -\frac{b}{2a} \)，y坐標需代入計算</li>
+                    
+                    <li><strong>錯誤：</strong>開口方向判斷錯誤</li>
+                    <li><strong>避免方法：</strong>\( a > 0 \) 開口向上，\( a < 0 \) 開口向下</li>
+                    
+                    <li><strong>錯誤：</strong>對稱軸方程寫錯</li>
+                    <li><strong>避免方法：</strong>對稱軸是垂直線 \( x = h \)，不是 \( y = h \)</li>
+                </ul>
+            </div>
+            
+            <h3>8.3 解題策略與技巧</h3>
+            
+            <div class="tip-box">
+                <h4>選擇題解題策略</h4>
+                <ul class="math-list">
+                    <li><strong>代入法：</strong>將選項代入題目驗證，特別是方程根的問題</li>
+                    <li><strong>排除法：</strong>先排除明顯錯誤的選項</li>
+                    <li><strong>特殊值法：</strong>用特殊值（如0、1等）測試</li>
+                    <li><strong>圖像法：</strong>畫草圖幫助理解，特別是函數圖像問題</li>
+                </ul>
+            </div>
+            
+            <div class="tip-box">
+                <h4>長題目解題策略</h4>
+                <ul class="math-list">
+                    <li><strong>分步解答：</strong>即使不會全部，寫出部分步驟也能得分</li>
+                    <li><strong>清晰表達：</strong>寫清楚每一步的推理過程</li>
+                    <li><strong>合理假設：</strong>必要時設未知數，建立方程</li>
+                    <li><strong>檢查答案：</strong>解出答案後代入原題驗證</li>
+                </ul>
+            </div>
+            
+            <h3>8.4 考前準備與心態調整</h3>
+            
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h4>知識準備</h4>
+                    <ul>
+                        <li>複習所有公式，製作公式卡</li>
+                        <li>重點練習薄弱環節</li>
+                        <li>做歷屆試題，熟悉題型</li>
+                        <li>整理錯題本，分析錯誤原因</li>
+                    </ul>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>物質準備</h4>
+                    <ul>
+                        <li>準備好計算器（如果允許）</li>
+                        <li>帶備足夠的筆、鉛筆、橡皮擦</li>
+                        <li>準備直尺、量角器等作圖工具</li>
+                        <li>帶手錶，注意時間管理</li>
+                    </ul>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>心理準備</h4>
+                    <ul>
+                        <li>保持充足睡眠，考試前晚不熬夜</li>
+                        <li>考試當天吃適量早餐</li>
+                        <li>提前到達考場，熟悉環境</li>
+                        <li>深呼吸放鬆，保持冷靜</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="explanation-box">
+                <h4>考試當天應急策略</h4>
+                <ul class="math-list">
+                    <li><strong>遇到難題：</strong>先跳過，做完其他題目再回頭思考</li>
+                    <li><strong>時間不夠：</strong>先做有把握的部分，確保基礎分</li>
+                    <li><strong>腦中空白：</strong>深呼吸，從最簡單的題目開始</li>
+                    <li><strong>檢查時修改答案：</strong>除非確信原答案錯誤，否則不要輕易修改</li>
+                </ul>
+            </div>
+            
+            <div class="tip-box">
+                <h4>📝 最後提醒</h4>
+                <ul class="math-list">
+                    <li>仔細閱讀題目，注意關鍵字如「化簡」、「因式分解」、「求範圍」等</li>
+                    <li>寫清楚解題步驟，即使答案錯誤，過程也可能得分</li>
+                    <li>檢查單位是否正確，是否需要化簡分數</li>
+                    <li>答案寫在指定位置，保持卷面整潔</li>
+                    <li>相信自己，你已經做好了準備！</li>
+                </ul>
+            </div>
+        </section>
+        
+        <footer>
+            <p>本溫習網站基於王劍鋒老師的數學筆記與工作紙整理，涵蓋中四數學期中試主要內容</p>
+            <p>© 2025 中四數學全面溫習指南 | 最後更新：2025年9月</p>
+            
+            <div class="footer-links">
+                <a href="#chapter1" class="footer-link">二次方程基礎</a>
+                <a href="#chapter2" class="footer-link">判別式</a>
+                <a href="#chapter3" class="footer-link">二次函數</a>
+                <a href="#chapter4" class="footer-link">直線方程</a>
+                <a href="#chapter5" class="footer-link">複數運算</a>
+                <a href="#chapter6" class="footer-link">應用題</a>
+                <a href="#chapter7" class="footer-link">公式變換</a>
+                <a href="#chapter8" class="footer-link">考試技巧</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // 初始化MathJax
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+        
+        // 判別式計算器
+        function calculateDiscriminant() {
+            const a = parseFloat(document.getElementById('coeffA').value);
+            const b = parseFloat(document.getElementById('coeffB').value);
+            const c = parseFloat(document.getElementById('coeffC').value);
+            
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                document.getElementById('discriminant-result').innerHTML = 
+                    '<div class="result-title" style="color:var(--accent-red);">錯誤：請輸入有效的數字</div>';
+                return;
+            }
+            
+            if (a === 0) {
+                document.getElementById('discriminant-result').innerHTML = 
+                    '<div class="result-title" style="color:var(--accent-red);">錯誤：a 不能為 0（不是二次方程）</div>';
+                return;
+            }
+            
+            const discriminant = b*b - 4*a*c;
+            let resultHTML = '<div class="result-title">計算結果</div>';
+            resultHTML += `<p>方程：${a}x² + ${b}x + ${c} = 0</p>`;
+            resultHTML += `<p>判別式 Δ = ${b}² - 4×${a}×${c} = ${discriminant}</p>`;
+            
+            if (discriminant > 0) {
+                const root1 = (-b + Math.sqrt(discriminant)) / (2*a);
+                const root2 = (-b - Math.sqrt(discriminant)) / (2*a);
+                resultHTML += `<p style="color:var(--accent-green); font-weight:bold;">Δ > 0，有兩個相異實根：</p>`;
+                resultHTML += `<p>x₁ = ${root1.toFixed(4)}</p>`;
+                resultHTML += `<p>x₂ = ${root2.toFixed(4)}</p>`;
+            } else if (discriminant === 0) {
+                const root = -b / (2*a);
+                resultHTML += `<p style="color:var(--accent-orange); font-weight:bold;">Δ = 0，有一個二重實根：</p>`;
+                resultHTML += `<p>x = ${root.toFixed(4)}（重根）</p>`;
+            } else {
+                const realPart = -b / (2*a);
+                const imaginaryPart = Math.sqrt(-discriminant) / (2*a);
+                resultHTML += `<p style="color:var(--accent-red); font-weight:bold;">Δ < 0，沒有實根，有兩個複數根：</p>`;
+                resultHTML += `<p>x₁ = ${realPart.toFixed(4)} + ${imaginaryPart.toFixed(4)}i</p>`;
+                resultHTML += `<p>x₂ = ${realPart.toFixed(4)} - ${imaginaryPart.toFixed(4)}i</p>`;
+            }
+            
+            document.getElementById('discriminant-result').innerHTML = resultHTML;
+            MathJax.typeset();
+        }
+        
+        // 重置判別式計算器
+        function resetDiscriminant() {
+            document.getElementById('coeffA').value = 1;
+            document.getElementById('coeffB').value = -4;
+            document.getElementById('coeffC').value = 3;
+            document.getElementById('discriminant-result').innerHTML = 
+                '<div class="result-title">結果將顯示在這裡</div>';
+        }
+        
+        // 已知一點和斜率求直線方程
+        function findLineFromPointSlope() {
+            const x1 = parseFloat(document.getElementById('pointX').value);
+            const y1 = parseFloat(document.getElementById('pointY').value);
+            const m = parseFloat(document.getElementById('slopeM').value);
+            
+            if (isNaN(x1) || isNaN(y1) || isNaN(m)) {
+                document.getElementById('point-slope-result').innerHTML = 
+                    '<div style="color:var(--accent-red);">請輸入有效的數字</div>';
+                return;
+            }
+            
+            // 使用點斜式：y - y1 = m(x - x1)
+            // 轉化為斜截式：y = mx + (y1 - m*x1)
+            const c = y1 - m*x1;
+            
+            let equation, generalForm;
+            
+            // 斜截式
+            if (c >= 0) {
+                equation = `y = ${m}x + ${c}`;
+            } else {
+                equation = `y = ${m}x - ${Math.abs(c)}`;
+            }
+            
+            // 一般式：mx - y + c = 0
+            if (c >= 0) {
+                generalForm = `${m}x - y + ${c} = 0`;
+            } else {
+                generalForm = `${m}x - y - ${Math.abs(c)} = 0`;
+            }
+            
+            // 點斜式
+            let pointSlopeForm;
+            if (x1 >= 0) {
+                pointSlopeForm = `y - ${y1} = ${m}(x - ${x1})`;
+            } else {
+                pointSlopeForm = `y - ${y1} = ${m}(x + ${Math.abs(x1)})`;
+            }
+            
+            let resultHTML = '<div class="result-title">直線方程</div>';
+            resultHTML += `<p><strong>點斜式：</strong>${pointSlopeForm}</p>`;
+            resultHTML += `<p><strong>斜截式：</strong>${equation}</p>`;
+            resultHTML += `<p><strong>一般式：</strong>${generalForm}</p>`;
+            
+            document.getElementById('point-slope-result').innerHTML = resultHTML;
+        }
+        
+        // 已知兩點求直線方程
+        function findLineFromTwoPoints() {
+            const x1 = parseFloat(document.getElementById('point1X').value);
+            const y1 = parseFloat(document.getElementById('point1Y').value);
+            const x2 = parseFloat(document.getElementById('point2X').value);
+            const y2 = parseFloat(document.getElementById('point2Y').value);
+            
+            if (isNaN(x1) || isNaN(y1) || isNaN(x2) || isNaN(y2)) {
+                document.getElementById('two-point-result').innerHTML = 
+                    '<div style="color:var(--accent-red);">請輸入有效的數字</div>';
+                return;
+            }
+            
+            if (Math.abs(x2 - x1) < 0.0001) {
+                // 垂直線情況
+                let resultHTML = '<div class="result-title">直線方程</div>';
+                resultHTML += `<p>兩點x坐標相同，這是垂直線：</p>`;
+                resultHTML += `<p><strong>x = ${x1}</strong></p>`;
+                document.getElementById('two-point-result').innerHTML = resultHTML;
+                return;
+            }
+            
+            // 計算斜率
+            const m = (y2 - y1) / (x2 - x1);
+            
+            // 使用點斜式
+            const c = y1 - m*x1;
+            
+            let equation;
+            
+            // 斜截式
+            if (Math.abs(c) < 0.0001) {
+                equation = `y = ${m.toFixed(4)}x`;
+            } else if (c > 0) {
+                equation = `y = ${m.toFixed(4)}x + ${c.toFixed(4)}`;
+            } else {
+                equation = `y = ${m.toFixed(4)}x - ${Math.abs(c).toFixed(4)}`;
+            }
+            
+            let resultHTML = '<div class="result-title">直線方程</div>';
+            resultHTML += `<p><strong>斜率：</strong>m = (${y2} - ${y1}) / (${x2} - ${x1}) = ${m.toFixed(4)}</p>`;
+            resultHTML += `<p><strong>直線方程：</strong>${equation}</p>`;
+            
+            // 一般式
+            const a = m;
+            const b = -1;
+            const cGeneral = c;
+            
+            let generalForm;
+            if (cGeneral >= 0) {
+                generalForm = `${a.toFixed(4)}x - y + ${cGeneral.toFixed(4)} = 0`;
+            } else {
+                generalForm = `${a.toFixed(4)}x - y - ${Math.abs(cGeneral).toFixed(4)} = 0`;
+            }
+            
+            resultHTML += `<p><strong>一般式：</strong>${generalForm}</p>`;
+            
+            document.getElementById('two-point-result').innerHTML = resultHTML;
+        }
+        
+        // 複數運算
+        function calculateComplex(operation) {
+            let resultHTML = '<div class="result-title">計算結果</div>';
+            
+            if (operation === 'add') {
+                const a = parseFloat(document.getElementById('c1Real').value);
+                const b = parseFloat(document.getElementById('c1Imag').value);
+                const c = parseFloat(document.getElementById('c2Real').value);
+                const d = parseFloat(document.getElementById('c2Imag').value);
+                
+                if (isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d)) {
+                    document.getElementById('complex-add-result').innerHTML = 
+                        '<div style="color:var(--accent-red);">請輸入有效的數字</div>';
+                    return;
+                }
+                
+                const realPart = a + c;
+                const imagPart = b + d;
+                
+                resultHTML += `<p>計算：(${a} + ${b}i) + (${c} + ${d}i)</p>`;
+                resultHTML += `<p>實部：${a} + ${c} = ${realPart}</p>`;
+                resultHTML += `<p>虛部：${b}i + ${d}i = ${imagPart}i</p>`;
+                
+                let result;
+                if (imagPart >= 0) {
+                    result = `${realPart} + ${imagPart}i`;
+                } else {
+                    result = `${realPart} - ${Math.abs(imagPart)}i`;
+                }
+                
+                resultHTML += `<p><strong>結果：</strong>${result}</p>`;
+                
+                document.getElementById('complex-add-result').innerHTML = resultHTML;
+            } 
+            else if (operation === 'multiply') {
+                const a = parseFloat(document.getElementById('c3Real').value);
+                const b = parseFloat(document.getElementById('c3Imag').value);
+                const c = parseFloat(document.getElementById('c4Real').value);
+                const d = parseFloat(document.getElementById('c4Imag').value);
+                
+                if (isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d)) {
+                    document.getElementById('complex-multiply-result').innerHTML = 
+                        '<div style="color:var(--accent-red);">請輸入有效的數字</div>';
+                    return;
+                }
+                
+                // (a+bi)(c+di) = ac + adi + bci + bdi²
+                // = (ac - bd) + (ad + bc)i
+                const realPart = a*c - b*d;
+                const imagPart = a*d + b*c;
+                
+                resultHTML += `<p>計算：(${a} + ${b}i) × (${c} + ${d}i)</p>`;
+                resultHTML += `<p>展開：(${a}×${c}) + (${a}×${d}i) + (${b}i×${c}) + (${b}i×${d}i)</p>`;
+                resultHTML += `<p>化簡：${a*c} + ${a*d}i + ${b*c}i + ${b*d}i²</p>`;
+                resultHTML += `<p>由於 i² = -1：${a*c} + ${a*d}i + ${b*c}i - ${b*d}</p>`;
+                resultHTML += `<p>實部：${a*c} - ${b*d} = ${realPart}</p>`;
+                resultHTML += `<p>虛部：${a*d} + ${b*c} = ${imagPart}</p>`;
+                
+                let result;
+                if (imagPart >= 0) {
+                    result = `${realPart} + ${imagPart}i`;
+                } else {
+                    result = `${realPart} - ${Math.abs(imagPart)}i`;
+                }
+                
+                resultHTML += `<p><strong>結果：</strong>${result}</p>`;
+                
+                document.getElementById('complex-multiply-result').innerHTML = resultHTML;
+            }
+        }
+        
+        // 頁面加載完成後初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始計算一次判別式
+            calculateDiscriminant();
+            
+            // 初始化直線方程計算
+            findLineFromPointSlope();
+            findLineFromTwoPoints();
+            
+            // 初始化複數計算
+            calculateComplex('add');
+            calculateComplex('multiply');
+            
+            // 為導航添加平滑滾動
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
